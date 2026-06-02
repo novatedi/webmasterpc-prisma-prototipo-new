@@ -1,0 +1,50 @@
+// Hace que los componentes shadcn (.jsx) sean tipados como `any` para
+// poder consumirlos desde archivos .tsx sin fricción.
+// Cada submódulo se declara como `any`.
+
+declare module "@/components/ui/accordion";
+declare module "@/components/ui/alert";
+declare module "@/components/ui/alert-dialog";
+declare module "@/components/ui/aspect-ratio";
+declare module "@/components/ui/avatar";
+declare module "@/components/ui/badge";
+declare module "@/components/ui/breadcrumb";
+declare module "@/components/ui/button";
+declare module "@/components/ui/calendar";
+declare module "@/components/ui/card";
+declare module "@/components/ui/carousel";
+declare module "@/components/ui/checkbox";
+declare module "@/components/ui/collapsible";
+declare module "@/components/ui/command";
+declare module "@/components/ui/context-menu";
+declare module "@/components/ui/dialog";
+declare module "@/components/ui/drawer";
+declare module "@/components/ui/dropdown-menu";
+declare module "@/components/ui/form";
+declare module "@/components/ui/hover-card";
+declare module "@/components/ui/input-otp";
+declare module "@/components/ui/input";
+declare module "@/components/ui/label";
+declare module "@/components/ui/menubar";
+declare module "@/components/ui/navigation-menu";
+declare module "@/components/ui/pagination";
+declare module "@/components/ui/popover";
+declare module "@/components/ui/progress";
+declare module "@/components/ui/radio-group";
+declare module "@/components/ui/resizable";
+declare module "@/components/ui/scroll-area";
+declare module "@/components/ui/select";
+declare module "@/components/ui/separator";
+declare module "@/components/ui/sheet";
+declare module "@/components/ui/skeleton";
+declare module "@/components/ui/slider";
+declare module "@/components/ui/sonner";
+declare module "@/components/ui/switch";
+declare module "@/components/ui/table";
+declare module "@/components/ui/tabs";
+declare module "@/components/ui/textarea";
+declare module "@/components/ui/toast";
+declare module "@/components/ui/toaster";
+declare module "@/components/ui/toggle-group";
+declare module "@/components/ui/toggle";
+declare module "@/components/ui/tooltip";
