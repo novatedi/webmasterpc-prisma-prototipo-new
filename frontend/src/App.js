@@ -13,6 +13,10 @@ import EstadisticasPage from "@/pages/empresa/Estadisticas";
 import ProcesoPage from "@/pages/empresa/Proceso";
 import ContactoPage from "@/pages/empresa/Contacto";
 import RedesPage from "@/pages/empresa/Redes";
+import ServiciosLista from "@/pages/servicios/Lista";
+import EditarServicio from "@/pages/servicios/EditarServicio";
+import BlogArticulos from "@/pages/blog/Articulos";
+import EditarArticulo from "@/pages/blog/EditarArticulo";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -34,11 +38,14 @@ export default function App() {
           <Route path="/empresa/contacto" element={<ContactoPage />} />
           <Route path="/empresa/redes" element={<RedesPage />} />
 
-          <Route path="/servicios" element={<SectionPage sectionId="servicios" />} />
-          <Route path="/servicios/:sub" element={<SectionPage sectionId="servicios" />} />
+          <Route path="/servicios" element={<ServiciosLista />} />
+          <Route path="/servicios/bloque/nuevo" element={<EditarServicio />} />
+          <Route path="/servicios/bloque/:id" element={<EditarServicio />} />
 
-          <Route path="/blog" element={<SectionPage sectionId="blog" />} />
-          <Route path="/blog/:sub" element={<SectionPage sectionId="blog" />} />
+          <Route path="/blog" element={<Navigate to="/blog/articulos" replace />} />
+          <Route path="/blog/articulos" element={<BlogArticulos />} />
+          <Route path="/blog/articulo/nuevo" element={<EditarArticulo />} />
+          <Route path="/blog/articulo/:id" element={<EditarArticulo />} />
 
           {/* OBRAS */}
           <Route path="/obras" element={<Navigate to="/obras/catalogo" replace />} />

@@ -77,7 +77,6 @@ export const EMPRESA = {
   page: (id: string) => `empresa-${id}`,
   preview: (id: string) => `empresa-preview-${id}`,
   saveBtn: "empresa-save",
-  // Historia
   historiaTitle: "historia-title",
   historiaBody: "historia-body",
   historiaImage: "historia-image",
@@ -123,4 +122,43 @@ export const EMPRESA = {
   redToggle: (id: string) => `red-toggle-${id}`,
   redRemove: (id: string) => `red-remove-${id}`,
   redAdd: "red-add",
+};
+
+export const SERVICIOS = {
+  list: "servicios-list",
+  card: (id: string) => `service-card-${id}`,
+  cardEdit: (id: string) => `service-edit-${id}`,
+  addBtn: "service-add",
+  editor: "service-editor",
+  preview: "service-preview",
+  formTitle: "service-form-title",
+  formShort: "service-form-short",
+  formDescription: "service-form-description",
+  formImage: "service-form-image",
+  formImageBtn: "service-form-image-btn",
+  formIcon: "service-form-icon",
+  formActive: "service-form-active",
+  formSave: "service-form-save",
+  formDelete: "service-form-delete",
+};
+
+export const BLOG = {
+  list: "blog-list",
+  row: (id: string) => `article-row-${id}`,
+  rowEdit: (id: string) => `article-edit-${id}`,
+  rowDelete: (id: string) => `article-delete-${id}`,
+  addBtn: "article-add",
+  editor: "article-editor",
+  preview: "article-preview",
+  formTitle: "article-form-title",
+  formExcerpt: "article-form-excerpt",
+  formContent: "article-form-content",
+  formCover: "article-form-cover",
+  formCoverBtn: "article-form-cover-btn",
+  formStatus: "article-form-status",
+  formDate: "article-form-date",
+  formPublish: "article-form-publish",
+  formDraft: "article-form-draft",
+  searchInput: "blog-search-input",
+  filterStatus: "blog-filter-status",
 };

@@ -1,0 +1,44 @@
+{
+  "summary": "Frontend-only E2E test for Prompt 4/6 (SERVICIOS + BLOG). 25 functional checks executed end-to-end via Playwright on the public preview URL, covering list rendering, navigation, live preview sync, format toolbar (bold), validation toasts, delete flows, search, status filter, sidebar/redirect, and theme toggle. All checks PASSED (100%).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_executed": [
+    "PASS /servicios renders servicios-list",
+    "PASS service-card-srv-encargos / srv-restauracion / srv-talleres visible",
+    "PASS service-add navigates to /servicios/bloque/nuevo with blank editor",
+    "PASS save without title shows toast 'Pon un título al servicio.'",
+    "PASS topbar injects 'Volver' + service-form-save in editor",
+    "PASS live sync: editing service-form-title updates service-preview instantly",
+    "PASS service-form-delete removes srv-encargos and returns to /servicios with 2 cards",
+    "PASS theme-toggle works in /servicios and /servicios/bloque/:id",
+    "PASS /blog redirects to /blog/articulos (sidebar shows single subsection Artículos)",
+    "PASS blog-list shows 4 initial rows (art-1..art-4); art-4 is borrador",
+    "PASS blog-search-input 'corten' filters to 1 row ('Por qué uso acero corten')",
+    "PASS blog-filter-status has 3 buttons; clicking 'Borradores' leaves only art-4",
+    "PASS article-add navigates to /blog/articulo/nuevo with blank editor",
+    "PASS publish without title shows toast 'El artículo necesita un título.'",
+    "PASS article editor topbar injects article-form-draft + article-form-publish",
+    "PASS live sync: title -> preview h1; **bold** in content -> <strong>negrita</strong>",
+    "PASS publish on existing art-1 shows 'Cambios publicados' and form status badge becomes 'publicado'",
+    "PASS article-delete-art-3 removes the row and shows 'Artículo eliminado'",
+    "PASS theme-toggle works in /blog/articulos and /blog/articulo/:id"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "MINOR: `service-form-save` save handler does not call `setForm` to refresh state after `update`, but since the form is the source of truth, persistence is fine. Not a bug.",
+    "MINOR: EditarArticulo uses dependency array `[form]` for the topbar effect — re-registers actions on every keystroke; acceptable for live UX but could be optimized.",
+    "NOTE: Sidebar topbar container does not expose data-testid='topbar-actions' on the editor pages; testing relied on inner button testids (service-form-save, article-form-publish, etc.), which all work. Not a blocker."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100%"},
+  "test_credentials": "not required",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Prompt 4/6 (Servicios + Blog) fully verified end-to-end on public preview URL https://prisma-studio-1.preview.emergentagent.com. Initial data in stores: services srv-encargos/srv-restauracion/srv-talleres; articles art-1..art-4 (art-4 borrador). Note: in-memory Zustand stores; deletion in one test run persists during that session. Use page.goto for fresh load. The topbar action buttons are injected via topbar-actions-store and rendered inside the topbar; the container does not always have data-testid='topbar-actions' — query the action testids directly. All flows including drag&drop list, live preview sync, rich-text **bold** rendering, status filter, search, and theme toggle work correctly."
+}

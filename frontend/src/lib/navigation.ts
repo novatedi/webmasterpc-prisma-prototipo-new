@@ -43,21 +43,14 @@ export const sections: Section[] = [
     label: "Servicios",
     icon: "Boxes",
     to: "/servicios",
-    subsections: [
-      { id: "catalogo", label: "Catálogo", to: "/servicios/catalogo" },
-      { id: "encargos", label: "Encargos", to: "/servicios/encargos" },
-      { id: "talleres", label: "Talleres", to: "/servicios/talleres" },
-    ],
   },
   {
     id: "blog",
     label: "Blog",
     icon: "PenSquare",
-    to: "/blog",
+    to: "/blog/articulos",
     subsections: [
-      { id: "entradas", label: "Entradas", to: "/blog/entradas" },
-      { id: "borradores", label: "Borradores", to: "/blog/borradores" },
-      { id: "categorias", label: "Categorías", to: "/blog/categorias" },
+      { id: "articulos", label: "Artículos", to: "/blog/articulos" },
     ],
   },
   {
