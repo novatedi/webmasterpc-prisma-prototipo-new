@@ -69,20 +69,12 @@ export const sections: Section[] = [
     label: "Consultas",
     icon: "MessageSquare",
     to: "/consultas",
-    subsections: [
-      { id: "bandeja", label: "Bandeja de entrada", to: "/consultas/bandeja" },
-      { id: "respondidas", label: "Respondidas", to: "/consultas/respondidas" },
-    ],
   },
   {
     id: "resenas",
     label: "Reseñas",
     icon: "Star",
     to: "/resenas",
-    subsections: [
-      { id: "publicadas", label: "Publicadas", to: "/resenas/publicadas" },
-      { id: "pendientes", label: "Pendientes", to: "/resenas/pendientes" },
-    ],
   },
   {
     id: "ajustes",

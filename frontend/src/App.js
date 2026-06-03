@@ -17,6 +17,8 @@ import ServiciosLista from "@/pages/servicios/Lista";
 import EditarServicio from "@/pages/servicios/EditarServicio";
 import BlogArticulos from "@/pages/blog/Articulos";
 import EditarArticulo from "@/pages/blog/EditarArticulo";
+import ConsultasPage from "@/pages/Consultas";
+import ResenasPage from "@/pages/Resenas";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -55,11 +57,11 @@ export default function App() {
           <Route path="/obras/obra/nueva" element={<EditarObra />} />
           <Route path="/obras/obra/:id" element={<EditarObra />} />
 
-          <Route path="/consultas" element={<SectionPage sectionId="consultas" />} />
-          <Route path="/consultas/:sub" element={<SectionPage sectionId="consultas" />} />
+          <Route path="/consultas" element={<ConsultasPage />} />
+          <Route path="/consultas/:sub" element={<ConsultasPage />} />
 
-          <Route path="/resenas" element={<SectionPage sectionId="resenas" />} />
-          <Route path="/resenas/:sub" element={<SectionPage sectionId="resenas" />} />
+          <Route path="/resenas" element={<ResenasPage />} />
+          <Route path="/resenas/:sub" element={<ResenasPage />} />
 
           <Route path="/ajustes" element={<SectionPage sectionId="ajustes" />} />
           <Route path="/ajustes/:sub" element={<SectionPage sectionId="ajustes" />} />

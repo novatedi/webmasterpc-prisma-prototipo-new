@@ -162,3 +162,34 @@ export const BLOG = {
   searchInput: "blog-search-input",
   filterStatus: "blog-filter-status",
 };
+
+export const CONSULTAS = {
+  page: "page-consultas",
+  list: "consultas-list",
+  row: (id: string) => `consulta-row-${id}`,
+  detail: "consulta-detail",
+  searchInput: "consultas-search",
+  filterBtn: "consultas-filter",
+  kpi: (k: string) => `consultas-kpi-${k}`,
+  replyBtn: "consulta-reply",
+  pendingBtn: "consulta-mark-pending",
+  archiveBtn: "consulta-archive",
+  spamBtn: "consulta-mark-spam",
+  removeBtn: "consulta-remove",
+  backBtn: "consulta-back",
+  moreActions: "consulta-more",
+};
+
+export const RESENAS = {
+  page: "page-resenas",
+  list: "resenas-list",
+  row: (id: string) => `resena-row-${id}`,
+  detail: "resena-detail",
+  searchInput: "resenas-search",
+  filterBtn: "resenas-filter",
+  kpi: (k: string) => `resenas-kpi-${k}`,
+  publishBtn: "resena-publish",
+  featureBtn: "resena-feature",
+  hideBtn: "resena-hide",
+  removeBtn: "resena-remove",
+};
