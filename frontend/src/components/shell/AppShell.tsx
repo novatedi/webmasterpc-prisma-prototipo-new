@@ -4,7 +4,7 @@ import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 import { ContentTabs } from "./ContentTabs";
 import { SHELL } from "@/constants/testIds";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { useMobileNavStore } from "@/stores/mobile-nav-store";
 
 export function AppShell() {
@@ -33,6 +33,12 @@ export function AppShell() {
           side="left"
           className="w-[280px] border-r border-sidebar-border bg-sidebar p-0"
         >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Menú de navegación</SheetTitle>
+            <SheetDescription>
+              Accede a todas las secciones del panel de Prisma Studio.
+            </SheetDescription>
+          </SheetHeader>
           <Sidebar />
         </SheetContent>
       </Sheet>
