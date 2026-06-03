@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { findSectionByPath } from "@/lib/navigation";
 import { useThemeStore } from "@/stores/theme-store";
+import { useTopbarActions } from "@/stores/topbar-actions-store";
 import { branding } from "@/lib/data/branding";
 import { Icon } from "@/lib/icon";
 import { Button } from "@/components/ui/button";
@@ -56,6 +57,7 @@ export function Topbar() {
   const section = findSectionByPath(pathname);
   const meta = titles[section?.id ?? "inicio"] ?? titles.inicio;
   const { mode, toggle } = useThemeStore();
+  const injectedActions = useTopbarActions((s) => s.node);
 
   return (
     <header
@@ -73,6 +75,9 @@ export function Topbar() {
       </div>
 
       <div className="flex shrink-0 items-center gap-3">
+        {/* Acciones inyectadas por la página activa (ej. Vista previa + Publicar) */}
+        {injectedActions}
+
         {/* Toggle tema */}
         <Button
           variant="outline"

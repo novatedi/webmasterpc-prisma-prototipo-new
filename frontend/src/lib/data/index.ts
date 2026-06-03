@@ -1,6 +1,8 @@
 export * from "./types";
 export { branding } from "./branding";
-export { works, categories } from "./works";
+export { works } from "./works";
+export { categories } from "./categories";
+export { materials } from "./materials";
 export { companyBlocks } from "./company";
 export { blogPosts } from "./blog";
 export { messages } from "./messages";

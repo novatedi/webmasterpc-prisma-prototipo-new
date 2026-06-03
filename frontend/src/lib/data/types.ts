@@ -1,4 +1,4 @@
-// Tipos base de la app. Esquemas placeholder pensados para portar a Next.js.
+// Tipos base de la app. Esquemas pensados para portar a Next.js.
 // Todos los datos viven en memoria; nada persiste.
 
 export type ID = string;
@@ -16,20 +16,38 @@ export interface Category {
   id: ID;
   name: string;
   slug: string;
+  active: boolean;
+  order: number;
   description?: string;
 }
 
-export type WorkStatus = "publicada" | "borrador" | "archivada";
+export interface Material {
+  id: ID;
+  name: string;
+  slug: string;
+  active: boolean;
+  order: number;
+}
+
+export type WorkStatus = "publicada" | "borrador";
+
+export interface WorkImage {
+  id: ID;
+  url: string;
+}
 
 export interface Work {
   id: ID;
   title: string;
-  coverUrl: string;
-  categoryId?: ID;
-  year?: number;
-  material?: string;
-  dimensions?: string;
   description?: string;
+  coverUrl: string;
+  /** Galería de miniaturas. La primera puede coincidir con cover. */
+  images: WorkImage[];
+  categoryId?: ID;
+  /** Una obra puede tener varios materiales (ej. Hierro + Madera). */
+  materialIds: ID[];
+  year?: number;
+  dimensions?: string;
   status: WorkStatus;
   createdAt: string;
 }
@@ -74,7 +92,7 @@ export interface Review {
 }
 
 export interface VisitorStat {
-  day: string; // ISO date
+  day: string;
   visitors: number;
   pageviews: number;
 }
@@ -90,5 +108,5 @@ export interface QuickAction {
   label: string;
   description: string;
   to: string;
-  icon: string; // nombre lucide-react
+  icon: string;
 }

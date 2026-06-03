@@ -62,11 +62,11 @@ export const sections: Section[] = [
     id: "obras",
     label: "Obras",
     icon: "Hammer",
-    to: "/obras",
+    to: "/obras/catalogo",
     subsections: [
-      { id: "todas", label: "Todas", to: "/obras/todas" },
+      { id: "catalogo", label: "Catálogo", to: "/obras/catalogo" },
       { id: "categorias", label: "Categorías", to: "/obras/categorias" },
-      { id: "destacadas", label: "Destacadas", to: "/obras/destacadas" },
+      { id: "materiales", label: "Materiales", to: "/obras/materiales" },
     ],
   },
   {
@@ -105,11 +105,13 @@ export const sections: Section[] = [
 export function findSectionByPath(pathname: string): Section | undefined {
   // Primero busca match por subseccion
   for (const s of sections) {
-    if (s.subsections?.some((ss) => pathname.startsWith(ss.to))) return s;
+    if (s.subsections?.some((ss) => pathname === ss.to || pathname.startsWith(ss.to + "/")))
+      return s;
   }
   // Después por path principal
   return (
-    sections.find((s) => pathname === s.to || pathname.startsWith(s.to + "/")) ??
-    sections.find((s) => s.to === "/inicio")
+    sections.find(
+      (s) => pathname === s.to || pathname.startsWith(s.to + "/") || (s.to !== "/" && pathname.startsWith("/" + s.id)),
+    ) ?? sections.find((s) => s.to === "/inicio")
   );
 }
