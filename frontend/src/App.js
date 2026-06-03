@@ -6,6 +6,13 @@ import ObrasCatalogo from "@/pages/obras/Catalogo";
 import ObrasCategorias from "@/pages/obras/Categorias";
 import ObrasMateriales from "@/pages/obras/Materiales";
 import EditarObra from "@/pages/obras/EditarObra";
+import HistoriaPage from "@/pages/empresa/Historia";
+import BiografiaPage from "@/pages/empresa/Biografia";
+import FilosofiaPage from "@/pages/empresa/Filosofia";
+import EstadisticasPage from "@/pages/empresa/Estadisticas";
+import ProcesoPage from "@/pages/empresa/Proceso";
+import ContactoPage from "@/pages/empresa/Contacto";
+import RedesPage from "@/pages/empresa/Redes";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -18,8 +25,14 @@ export default function App() {
           <Route index element={<Navigate to="/inicio" replace />} />
           <Route path="/inicio" element={<InicioPage />} />
 
-          <Route path="/empresa" element={<SectionPage sectionId="empresa" />} />
-          <Route path="/empresa/:sub" element={<SectionPage sectionId="empresa" />} />
+          <Route path="/empresa" element={<Navigate to="/empresa/historia" replace />} />
+          <Route path="/empresa/historia" element={<HistoriaPage />} />
+          <Route path="/empresa/biografia" element={<BiografiaPage />} />
+          <Route path="/empresa/filosofia" element={<FilosofiaPage />} />
+          <Route path="/empresa/estadisticas" element={<EstadisticasPage />} />
+          <Route path="/empresa/proceso" element={<ProcesoPage />} />
+          <Route path="/empresa/contacto" element={<ContactoPage />} />
+          <Route path="/empresa/redes" element={<RedesPage />} />
 
           <Route path="/servicios" element={<SectionPage sectionId="servicios" />} />
           <Route path="/servicios/:sub" element={<SectionPage sectionId="servicios" />} />

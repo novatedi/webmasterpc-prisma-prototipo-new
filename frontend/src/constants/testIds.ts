@@ -47,7 +47,6 @@ export const OBRAS = {
   workEditBtn: (id: string) => `work-edit-${id}`,
   workViewBtn: (id: string) => `work-view-${id}`,
   emptyState: "obras-empty-state",
-  // Editor
   editTitle: "edit-title",
   editDescription: "edit-description",
   editCategory: "edit-category",
@@ -58,7 +57,6 @@ export const OBRAS = {
   editUploadImage: "edit-upload-image",
   editPublishBtn: "edit-publish-btn",
   editPreviewBtn: "edit-preview-btn",
-  // Listas gestionables
   catList: "categories-list",
   catItem: (id: string) => `category-item-${id}`,
   catAdd: "category-add",
@@ -73,4 +71,56 @@ export const OBRAS = {
   matRenameInput: (id: string) => `material-rename-${id}`,
   matToggle: (id: string) => `material-toggle-${id}`,
   matRemove: (id: string) => `material-remove-${id}`,
+};
+
+export const EMPRESA = {
+  page: (id: string) => `empresa-${id}`,
+  preview: (id: string) => `empresa-preview-${id}`,
+  saveBtn: "empresa-save",
+  // Historia
+  historiaTitle: "historia-title",
+  historiaBody: "historia-body",
+  historiaImage: "historia-image",
+  historiaImageBtn: "historia-image-btn",
+  historiaCtaText: "historia-cta-text",
+  historiaCtaHref: "historia-cta-href",
+  hitoItem: (id: string) => `hito-item-${id}`,
+  hitoAdd: "hito-add",
+  hitoYear: (id: string) => `hito-year-${id}`,
+  hitoTitle: (id: string) => `hito-title-${id}`,
+  hitoDesc: (id: string) => `hito-desc-${id}`,
+  hitoRemove: (id: string) => `hito-remove-${id}`,
+  // Biografia
+  bioTitle: "bio-title",
+  bioBody: "bio-body",
+  bioPhotoBtn: "bio-photo-btn",
+  // Filosofia
+  filTitle: "fil-title",
+  filSubtitle: "fil-subtitle",
+  valorAdd: "valor-add",
+  valorItem: (id: string) => `valor-item-${id}`,
+  valorRemove: (id: string) => `valor-remove-${id}`,
+  // Estadisticas
+  estTitle: "est-title",
+  estAdd: "est-add",
+  estItem: (id: string) => `est-item-${id}`,
+  estRemove: (id: string) => `est-remove-${id}`,
+  // Proceso
+  procTitle: "proc-title",
+  procSubtitle: "proc-subtitle",
+  procAdd: "proc-add",
+  procItem: (id: string) => `proc-item-${id}`,
+  procRemove: (id: string) => `proc-remove-${id}`,
+  // Contacto
+  contactEmail: "contact-email",
+  contactPhone: "contact-phone",
+  contactAddress: "contact-address",
+  contactSchedule: "contact-schedule",
+  contactMap: "contact-map",
+  // Redes
+  redItem: (id: string) => `red-item-${id}`,
+  redUrl: (id: string) => `red-url-${id}`,
+  redToggle: (id: string) => `red-toggle-${id}`,
+  redRemove: (id: string) => `red-remove-${id}`,
+  redAdd: "red-add",
 };
