@@ -80,11 +80,11 @@ export const sections: Section[] = [
     id: "ajustes",
     label: "Ajustes",
     icon: "Settings",
-    to: "/ajustes",
+    to: "/ajustes/identidad",
     subsections: [
-      { id: "perfil", label: "Perfil", to: "/ajustes/perfil" },
-      { id: "marca", label: "Marca", to: "/ajustes/marca" },
+      { id: "identidad", label: "Identidad", to: "/ajustes/identidad" },
       { id: "dominio", label: "Dominio", to: "/ajustes/dominio" },
+      { id: "general", label: "General", to: "/ajustes/general" },
     ],
   },
 ];

@@ -19,6 +19,9 @@ import BlogArticulos from "@/pages/blog/Articulos";
 import EditarArticulo from "@/pages/blog/EditarArticulo";
 import ConsultasPage from "@/pages/Consultas";
 import ResenasPage from "@/pages/Resenas";
+import IdentidadPage from "@/pages/ajustes/Identidad";
+import DominioPage from "@/pages/ajustes/Dominio";
+import GeneralPage from "@/pages/ajustes/General";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -63,8 +66,10 @@ export default function App() {
           <Route path="/resenas" element={<ResenasPage />} />
           <Route path="/resenas/:sub" element={<ResenasPage />} />
 
-          <Route path="/ajustes" element={<SectionPage sectionId="ajustes" />} />
-          <Route path="/ajustes/:sub" element={<SectionPage sectionId="ajustes" />} />
+          <Route path="/ajustes" element={<Navigate to="/ajustes/identidad" replace />} />
+          <Route path="/ajustes/identidad" element={<IdentidadPage />} />
+          <Route path="/ajustes/dominio" element={<DominioPage />} />
+          <Route path="/ajustes/general" element={<GeneralPage />} />
 
           <Route path="*" element={<Navigate to="/inicio" replace />} />
         </Route>

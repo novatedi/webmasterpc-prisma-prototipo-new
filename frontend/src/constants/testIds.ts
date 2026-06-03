@@ -193,3 +193,32 @@ export const RESENAS = {
   hideBtn: "resena-hide",
   removeBtn: "resena-remove",
 };
+
+export const AJUSTES = {
+  page: (id: string) => `ajustes-${id}`,
+  preview: "ajustes-preview",
+  // Identidad
+  brandName: "ajustes-brand-name",
+  logoBtn: "ajustes-logo-btn",
+  logoImage: "ajustes-logo-image",
+  faviconBtn: "ajustes-favicon-btn",
+  faviconImage: "ajustes-favicon-image",
+  colorInput: "ajustes-color-input",
+  colorPreset: (hex: string) => `ajustes-color-preset-${hex.replace("#", "")}`,
+  fontSelect: "ajustes-font-select",
+  applyBtn: "ajustes-apply",
+  resetBtn: "ajustes-reset",
+  // Dominio
+  domainInput: "ajustes-domain",
+  domainStatus: "ajustes-domain-status",
+  domainSsl: "ajustes-domain-ssl",
+  domainWww: "ajustes-domain-www",
+  domainPublishBtn: "ajustes-domain-publish",
+  // General
+  generalStudio: "ajustes-general-studio",
+  generalTagline: "ajustes-general-tagline",
+  generalLang: "ajustes-general-lang",
+  generalTz: "ajustes-general-tz",
+  generalEmail: "ajustes-general-email",
+  generalSave: "ajustes-general-save",
+};

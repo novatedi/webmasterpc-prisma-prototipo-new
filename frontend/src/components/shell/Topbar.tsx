@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { findSectionByPath } from "@/lib/navigation";
 import { useThemeStore } from "@/stores/theme-store";
 import { useTopbarActions } from "@/stores/topbar-actions-store";
+import { useMobileNavStore } from "@/stores/mobile-nav-store";
 import { branding } from "@/lib/data/branding";
 import { Icon } from "@/lib/icon";
 import { Button } from "@/components/ui/button";
@@ -58,20 +59,34 @@ export function Topbar() {
   const meta = titles[section?.id ?? "inicio"] ?? titles.inicio;
   const { mode, toggle } = useThemeStore();
   const injectedActions = useTopbarActions((s) => s.node);
+  const openMobileNav = useMobileNavStore((s) => s.toggle);
 
   return (
     <header
       data-testid={SHELL.topbar}
-      className="sticky top-0 z-30 flex items-start justify-between gap-6 border-b border-topbar-border bg-topbar/95 px-8 pt-6 pb-5 backdrop-blur"
+      className="sticky top-0 z-30 flex items-start justify-between gap-3 border-b border-topbar-border bg-topbar/95 px-4 pt-5 pb-4 backdrop-blur sm:gap-6 sm:px-6 md:px-8 md:pt-6 md:pb-5"
     >
-      <div className="min-w-0">
-        <h1
-          data-testid={SHELL.topbarTitle}
-          className="text-3xl font-extrabold tracking-tight text-foreground"
+      <div className="flex min-w-0 items-start gap-3">
+        <button
+          type="button"
+          onClick={openMobileNav}
+          aria-label="Abrir menú"
+          data-testid="topbar-menu-btn"
+          className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:bg-accent lg:hidden"
         >
-          {meta.title}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">{meta.subtitle}</p>
+          <Icon name="Menu" className="h-4 w-4" />
+        </button>
+        <div className="min-w-0">
+          <h1
+            data-testid={SHELL.topbarTitle}
+            className="truncate text-xl font-extrabold tracking-tight text-foreground sm:text-2xl md:text-3xl"
+          >
+            {meta.title}
+          </h1>
+          <p className="mt-1 hidden text-sm text-muted-foreground sm:block">
+            {meta.subtitle}
+          </p>
+        </div>
       </div>
 
       <div className="flex shrink-0 items-center gap-3">
