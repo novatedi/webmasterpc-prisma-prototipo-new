@@ -27,28 +27,18 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - Fuente Nunito (redondita, fácil lectura) por elección del usuario.
 - Cero textos hardcodeados en JSX – todo desde data files (preparado para portar a Next.js).
 
-## Implemented (P1/6) – 2026-02-12
-- [x] Setup TypeScript (tsconfig + types) sobre la plantilla CRA.
-- [x] Tokens de tema (light + dark) en `src/index.css` + Tailwind extendido.
-- [x] Tipografía Nunito vía Google Fonts.
-- [x] Tipos mock: `Work`, `Category`, `CompanyBlock`, `BlogPost`, `Message`, `Review`, `Branding`, `VisitorStat`, `TopPage`, `QuickAction`.
-- [x] Mock data poblada con contenido realista para escultor (8 obras, 5 bloques de empresa, 3 posts, 3 consultas, 3 reseñas, 7 días de visitas).
-- [x] Sidebar con secciones + subsecciones (acordeón + tabs sincronizados).
-- [x] Topbar con título dinámico, toggle tema accesible, notificaciones (3) y avatar dropdown.
-- [x] Página **Inicio** (dashboard): 4 KPIs, gráfico de visitantes (Recharts), top 5 páginas, 4 accesos rápidos.
-- [x] Placeholder de secciones aún no construidas (componente reutilizable).
-- [x] Toaster (sonner) integrado y temáticamente coherente.
-- [x] `data-testid` en todos los elementos críticos (centralizados en `constants/testIds.ts`).
-- [x] Testing E2E pasado al 100% (9/9 escenarios).
+## Implemented (P1/6 + P2/6 + P3/6) – 2026-02-12
+- [x] **P1/6**: Shell + 2 temas + Inicio (dashboard).
+- [x] **P2/6**: Obras (catálogo, categorías, materiales) + editor con preview en vivo.
+- [x] **P3/6**: La empresa con 7 subsecciones (Historia + línea de tiempo, Biografía, Filosofía/Valores, Estadísticas, Proceso, Contacto, Redes) — patrón 2 paneles (form + preview público) en cada subsección.
+- [x] Testing E2E: Prompt 1 9/9, Prompt 2 38/38, Prompt 3 81/81 → 100% en los tres prompts.
 
 ## Backlog (P0/P1/P2 para próximos prompts)
 
-### P0 – Prompts 2-6
-- **P2/6** – Sección **Obras** funcional: grid de cards, ficha/edición, categorías, subida de imágenes (mock).
-- **P3/6** – Sección **La empresa** + **Ajustes**: edición de bloques (historia, biografía, etc.), branding (logo, colores).
+### P0 – Prompts 4-6
 - **P4/6** – Sección **Blog** + **Servicios**: editor de entradas, categorías, catálogo de servicios.
 - **P5/6** – Sección **Consultas** + **Reseñas**: bandeja de mensajes, responder, moderación de reseñas.
-- **P6/6** – Pulido final: notificaciones reales (sin backend, en memoria), onboarding, búsqueda global, accesibilidad y tour guiado.
+- **P6/6** – Pulido final: ajustes, onboarding y accesibilidad.
 
 ### P1
 - Persistencia de operaciones en memoria coherente (Zustand stores por dominio).
