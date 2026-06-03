@@ -27,18 +27,18 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - Fuente Nunito (redondita, fácil lectura) por elección del usuario.
 - Cero textos hardcodeados en JSX – todo desde data files (preparado para portar a Next.js).
 
-## Implemented (P1/6 + P2/6 + P3/6 + P4/6) – 2026-02-12
+## Implemented (P1/6 + P2/6 + P3/6 + P4/6 + P5/6) – 2026-02-12
 - [x] **P1/6**: Shell + 2 temas + Inicio (dashboard).
 - [x] **P2/6**: Obras (catálogo, categorías, materiales) + editor con preview en vivo.
 - [x] **P3/6**: La empresa con 7 subsecciones + preview público en cada una.
-- [x] **P4/6**: Servicios (lista de bloques con drag&drop + editor con preview) y Blog (lista filtrable + editor con formato y preview tipo artículo público).
-- [x] Testing E2E: P1 9/9 · P2 38/38 · P3 81/81 · P4 25/25 — todos al 100%.
+- [x] **P4/6**: Servicios + Blog con editor de artículos y formato.
+- [x] **P5/6**: Consultas (bandeja con 4 KPIs, lista filtrable, detalle con Responder/Pendiente/Archivar/Spam/Eliminar) y Reseñas (4 KPIs, lista con estrellas, detalle con 3 acciones grandes Publicar/Destacar/Ocultar).
+- [x] Testing E2E: P1 9/9 · P2 38/38 · P3 81/81 · P4 25/25 · P5 16/16 — todos al 100%.
 
 ## Backlog (P0/P1/P2 para próximos prompts)
 
-### P0 – Prompts 5-6
-- **P5/6** – Sección **Consultas** + **Reseñas**: bandeja de mensajes, responder, moderación de reseñas.
-- **P6/6** – Pulido final: ajustes, onboarding y accesibilidad.
+### P0 – Prompt 6
+- **P6/6** – Sección **Ajustes** (perfil, marca, dominio) + pulido final.
 
 ### P1
 - Persistencia de operaciones en memoria coherente (Zustand stores por dominio).
