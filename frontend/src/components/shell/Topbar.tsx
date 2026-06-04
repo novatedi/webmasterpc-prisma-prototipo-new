@@ -32,6 +32,27 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     subtitle:
       "Compón cada página combinando secciones prediseñadas. Arrastra para ordenar.",
   },
+  funciones: {
+    title: "Funciones",
+    subtitle:
+      "Activa solo lo que necesitas; tu panel se mantiene simple.",
+  },
+  biblioteca: {
+    title: "Biblioteca",
+    subtitle: "Tus archivos compartidos entre obras, blog y páginas.",
+  },
+  "preview-web": {
+    title: "Vista previa web",
+    subtitle: "Mira tu web pública en una pestaña aparte.",
+  },
+  identidad: {
+    title: "Identidad",
+    subtitle: "Logo, color principal y tipografía de tu marca.",
+  },
+  modulos: {
+    title: "Módulo",
+    subtitle: "Este módulo se está preparando.",
+  },
   servicios: {
     title: "Servicios",
     subtitle: "Lo que ofreces a tus clientes y galerías.",
@@ -60,8 +81,25 @@ const titles: Record<string, { title: string; subtitle: string }> = {
 
 export function Topbar() {
   const { pathname } = useLocation();
-  const section = findSectionByPath(pathname);
-  const meta = titles[section?.id ?? "inicio"] ?? titles.inicio;
+  // Resolución directa por prefijo de path
+  const sectionId = (() => {
+    if (pathname.startsWith("/inicio")) return "inicio";
+    if (pathname.startsWith("/empresa")) return "empresa";
+    if (pathname.startsWith("/obras")) return "obras";
+    if (pathname.startsWith("/paginas")) return "paginas";
+    if (pathname.startsWith("/funciones")) return "funciones";
+    if (pathname.startsWith("/biblioteca")) return "biblioteca";
+    if (pathname.startsWith("/preview-web")) return "preview-web";
+    if (pathname.startsWith("/ajustes/identidad")) return "identidad";
+    if (pathname.startsWith("/ajustes")) return "ajustes";
+    if (pathname.startsWith("/blog")) return "blog";
+    if (pathname.startsWith("/servicios")) return "servicios";
+    if (pathname.startsWith("/consultas")) return "consultas";
+    if (pathname.startsWith("/resenas")) return "resenas";
+    if (pathname.startsWith("/modulos")) return "modulos";
+    return "inicio";
+  })();
+  const meta = titles[sectionId] ?? titles.inicio;
   const { mode, toggle } = useThemeStore();
   const injectedActions = useTopbarActions((s) => s.node);
   const openMobileNav = useMobileNavStore((s) => s.toggle);
