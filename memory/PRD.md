@@ -45,6 +45,14 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
   - BarChart horizontal "Obras más populares".
   - Tabla "Páginas más vistas" (ruta + nombre + visitas + tiempo medio).
   - **Ampliación (2026-06-04):** tarjeta "Ciudades de origen" (lista con barras + %) y tarjeta "Buscadores IA / LLM Referrals" (ChatGPT, Perplexity, Gemini, Copilot, Claude con icono de marca, conteo de referidos y tendencia %). Datos por rango en `lib/data/analiticas.ts` (campos `cities`, `llm`).
+- [x] **Textos Legales & Privacidad** (módulo activable, ruta `/legal`) – 2026-06-04. Generador condicional RGPD+LSSI (España), 100% mock:
+  - Asistente: datos fiscales (precargados escultor) + 5 casillas de situación (cookies analíticas, formulario, citas, newsletter, vende online) + "Generar documentos".
+  - Documentos en pestañas, condicionales: 3 base (Aviso Legal, Privacidad, Cookies) + 3 si vende online (Condiciones, Devoluciones, Accesibilidad EAA). Paso 0 por doc (usar los míos / generar), editor de texto plano y estado Completo/Pendiente. Texto adaptado a datos+casillas.
+  - Aviso permanente "Plantilla orientativa, NO asesoramiento legal".
+  - Gestor de cookies: editor + previsualización de banner (Aceptar todo/Rechazar/Configurar) + panel por categorías (Necesarias bloqueada, Analíticas, Marketing).
+  - Cláusula de formularios (consentimiento) con chips de enlace a contacto/citas/newsletter.
+  - Publicar: lista de páginas legales publicadas (/aviso-legal, /privacidad, /cookies, etc.).
+  - Archivos: `pages/Legal.tsx`, `stores/legal-store.ts`, `lib/data/legal.ts`, `components/legal/*`, testIds `LEGAL`. Testeado por testing_agent (12/13, sin errores de consola).
   - Archivos: `pages/Analiticas.tsx`, `lib/data/analiticas.ts`, ruta `/analiticas`, módulo en `modules.ts` con `to:/analiticas`, títulos en `Topbar.tsx`, testIds `ANALITICAS`.
 
 ## Backlog (P0/P1/P2 para próximos prompts)
