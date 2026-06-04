@@ -1,0 +1,29 @@
+{
+  "summary": "Tested the new Legal module (/legal) end-to-end: page loads, disclaimer, fiscal seeds, 5 situation switches, conditional rendering before/after generate, 3 default docs (ventaOnline OFF) + 3 extra docs when ventaOnline ON, per-doc status Completo/Pendiente, own vs generated mode toggling, generated text reflects fiscal data and situation flags, cookie editor updates banner, banner buttons present, Configurar panel with 3 categories (necesarias disabled), analiticas/marketing switches toggle, forms clause + chips, publish list of 6 slugs, dark mode, and module activation from /funciones. All flows worked; zero console errors. One minor deviation found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Module activation from /funciones", "issue": "Activating module-toggle-legal correctly adds 'Textos legales' to the sidebar and shows a success toast, but it does NOT auto-navigate to /legal as the spec requires ('hace que aparezca en la sidebar y navega a /legal'). URL stays on /funciones after the click.", "affected_selectors": ["[data-testid=\"module-toggle-legal\"]"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "On activating module-toggle-legal in /funciones, navigate to the module's route (/legal) when defaultActive flips from false to true, matching the spec for this module."
+  ],
+  "critical_code_review_comments": [
+    "DocumentosTabs only renders [data-testid=legal-doc-status-<id>] for the currently-active tab (inside TabsContent). If a tester wants to assert 'all 3 docs are Completo', they must click each tab first. Consider rendering the status badge inside the TabsTrigger (always mounted) or expose a hidden per-doc status node so tests/tabs can assert without switching tabs.",
+    "legal-store.ts: generateAll() only writes content for docs whose situacion applies; docs that don't apply (e.g., 'condiciones' before ventaOnline) keep content=''. That is correct, but make sure UI never lists them — confirmed via activeDocs filter. OK.",
+    "GestorCookies: 'prefs' state for analiticas/marketing toggles is local to the preview banner only and is not persisted in the store — acceptable for a mock preview, but worth a brief comment for future devs.",
+    "AsistenteGeneracion shows a sonner toast on every click of 'Generar documentos' (including subsequent regenerations). That is fine but you might want to dedupe the toast id to avoid stacking when users regenerate several times."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (no backend)", "frontend": "~95% (12/13 acceptance criteria fully met; only minor: module toggle does not auto-navigate)"},
+  "test_credentials": "N/A (no auth)",
+  "seed_data_creation": "None (all data comes from frontend seeds)",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Zustand store is in-memory, so any page.goto() resets it. Tests must do everything within a single navigation to /legal (click 'Generar documentos' first, then explore). The status badge for documents is mounted only inside the active TabsContent, so to assert per-doc status switch the tab first. The module toggle is at /funciones with id 'module-toggle-legal'; default state is OFF, so the legal sidebar entry appears only after toggling it.",
+  "rca of the issue": "Minor spec deviation: in /app/frontend/src/pages/Funciones.tsx (or wherever the module card toggles defaultActive), the on-toggle handler only updates store state + emits a toast. The spec asks that activating the 'legal' module also navigates to its 'to' route (/legal). Mitigation: after flipping the module to active for the first time, push to the module's `to` route via react-router's navigate() when defined."
+}

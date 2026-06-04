@@ -39,6 +39,29 @@ export const ANALITICAS = {
   llmRow: (id: string) => `analiticas-llm-row-${id}`,
 };
 
+export const LEGAL = {
+  page: "page-legal",
+  disclaimer: "legal-disclaimer",
+  fiscalInput: (k: string) => `legal-fiscal-${k}`,
+  situacion: (k: string) => `legal-situacion-${k}`,
+  generateBtn: "legal-generate-btn",
+  docsTabs: "legal-docs-tabs",
+  docTab: (id: string) => `legal-doc-tab-${id}`,
+  docModeOwn: (id: string) => `legal-doc-mode-own-${id}`,
+  docModeGen: (id: string) => `legal-doc-mode-gen-${id}`,
+  docEditor: (id: string) => `legal-doc-editor-${id}`,
+  docStatus: (id: string) => `legal-doc-status-${id}`,
+  cookieCard: "legal-cookie-card",
+  cookieEditor: "legal-cookie-editor",
+  cookieBanner: "legal-cookie-banner",
+  cookieConfig: "legal-cookie-config",
+  cookieCat: (k: string) => `legal-cookie-cat-${k}`,
+  formsCard: "legal-forms-card",
+  formsEditor: "legal-forms-editor",
+  publishBtn: "legal-publish-btn",
+  publishedList: "legal-published-list",
+};
+
 export const PAGES = {
   empresa: "page-empresa",
   servicios: "page-servicios",

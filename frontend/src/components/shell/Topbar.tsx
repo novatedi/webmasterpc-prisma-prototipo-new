@@ -62,6 +62,11 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     subtitle:
       "Supervisa el rendimiento de tu web: visitas, obras más populares y tráfico.",
   },
+  legal: {
+    title: "Textos Legales & Privacidad",
+    subtitle:
+      "Genera los textos legales obligatorios de tu web (RGPD + LSSI, España) o usa los tuyos.",
+  },
   mantenimiento: {
     title: "Mantenimiento",
     subtitle:
@@ -114,6 +119,7 @@ export function Topbar() {
     if (pathname.startsWith("/modulos")) return "modulos";
     if (pathname.startsWith("/prensa")) return "prensa";
     if (pathname.startsWith("/analiticas")) return "analiticas";
+    if (pathname.startsWith("/legal")) return "legal";
     return "inicio";
   })();
   const meta = titles[sectionId] ?? titles.inicio;

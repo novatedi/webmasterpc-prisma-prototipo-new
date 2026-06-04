@@ -384,6 +384,15 @@ export const MODULES: ModuleDef[] = [
     badge: "Pro",
   },
   {
+    id: "legal",
+    label: "Textos legales",
+    icon: "Scale",
+    description: "Aviso legal, privacidad y cookies (RGPD + LSSI).",
+    category: "ajustes-mod",
+    defaultActive: false,
+    to: "/legal",
+  },
+  {
     id: "seguridad",
     label: "Seguridad",
     icon: "Shield",
