@@ -1,0 +1,133 @@
+<analysis>**original_problem_statement**: 
+Prisma Studio: An admin panel prototype for an older sculptor (45-70 years old) to manage his professional website without technical jargon. 
+PRODUCT REQUIREMENTS: 
+- FRONTEND ONLY using React, TypeScript, Tailwind CSS, shadcn/ui, lucide-react. 
+- State management with Zustand (in-memory, no persistence). 
+- Mock data stored in . 
+- NO BACKEND. PROHIBITED: FastAPI, MongoDB, Pydantic, Stripe, real databases, or real login. 
+- UI relies on a 2-panel layout for content editing (Form on the left + Live Preview on the right). 
+- Must include a Dark/Light mode toggle.
+
+**User's preferred language**: Spanish (Español). 
+*INSTRUCT NEXT AGENT: You MUST respond to the user exclusively in Spanish.*
+
+**what currently exists?** 
+A fully functional React SPA prototype representing the Prisma Studio CMS. It includes a modular sidebar, dark/light themes, drag-and-drop ordering (), Zustand state stores for all modules, and real-time live previews for sections like Works (Obras), Company (La Empresa), Pages (Páginas composer), and Settings (Ajustes).
+
+**Last working item**: 
+    - Last item agent was working: Implementing the Mantenimiento (Maintenance) page under Ajustes. The agent successfully created the file (), updated the Zustand stores, and modified the router. It compiled successfully, but the agent was cut off before visually validating or testing it.
+    - Status: TESTING PENDING
+    - Agent Testing Done: N
+    - Which testing method agent to use? Frontend testing agent / screenshot tool. First use  to visually verify the Maintenance layout, then use  for E2E validation.
+    - User Testing Done: N
+
+**All Pending/In progress Issue list**:
+  - Issue 1: Missing Verification and Handover for Mantenimiento
+     - Attempted fixes: N/A (Code was just written and compiled successfully).
+     - Next debug checklist: Take a screenshot of  to ensure the live preview and form render correctly. Run  to ensure interactions (toggles, inputs) update the live preview via Zustand.
+     - Why fix this issue and what will be achieved with the fix?: Validates the final requested feature and allows the agent to issue the  tool summary to the user.
+     - Status: TESTING PENDING
+     - Is recurring issue? N
+     - Should Test frontend/backend/both after fix?: Frontend.
+     - Blocked on other issue: None.
+
+**In progress Task List**:
+  - Task 1: Complete and Finish Mantenimiento Feature
+     - Where to resume: Run  on the Maintenance page route. Review, run , and if passed, use the  tool to present the summary to the user in Spanish.
+     - What will be achieved with this?: Finalizes the requested Prompt: MANTENIMIENTO.
+     - Status: TESTING PENDING
+     - Should Test frontend/backend/both after fix?: Frontend
+     - Blocked on something: Nothing
+
+**Upcoming and Future Tasks**:
+    Upcoming Tasks:
+    - Await user feedback or the next prompt from the user after delivering the summary for Mantenimiento.
+    
+    Future Tasks:
+    - Potential implementation of the remaining unbuilt modules currently acting as placeholders in the Centro de Funciones (e.g., Tienda, Galería Inmersiva, Copiloto IA) IF the user explicitly requests them.
+
+**Completed work in this session**:
+- Initial Shell, Navigation, Dark/Light Mode (P1/6) (DONE)
+- Obras (Works, Categories, Materials) with Drag & Drop and Live Preview (P2/6) (DONE)
+- La Empresa (7 sub-sections including Timeline) with Live Preview (P3/6) (DONE)
+- Servicios & Blog editors (P4/6) (DONE)
+- Consultas & Reseñas (Inbox and Reviews) (P5/6) (DONE)
+- Ajustes (Identity, Domain, General) & Responsive mobile sidebar (P6/6) (DONE)
+- Páginas (Page composer with drag/drop bands and layout pickers) (P8) (DONE)
+- Centro de Funciones (Modular sidebar toggle) (P7) (DONE)
+- Biblioteca (Photo library with usage counters) (P9) (DONE)
+- Prensa (Press articles list and editor) (P10) (DONE)
+
+**Earlier issues found/mentioned but not fixed**:
+None. All bugs identified by  (such as the opacity bug in the Page Composer during Iteration 7/8) were successfully resolved and re-tested.
+
+**Known issue recurrence from previous fork**:
+  - Issue recurrence in previous fork: N/A
+  - Recurrence count: 0
+  - Status: RESOLVED
+
+**Code Architecture**:
+
+
+**Key Technical Concepts**:
+Frontend SPA, React, TypeScript, Tailwind CSS, shadcn/ui, Zustand (Global state),  (Drag and drop). **No Backend.**
+
+**key DB schema**:
+  - Mocked Data only. Data structures typed in  (e.g., , , ).
+
+**changes in tech stack**:
+  - Added , ,  for drag-and-drop lists.
+  - Added  for state management.
+
+**All files of reference**: 
+  -  (Newly created, needs testing)
+  -  (Updated to include Maintenance state)
+  -  (Router definition)
+  -  (Dynamic sidebar based on active modules)
+
+**Areas that need refactoring**: 
+  - N/A.
+
+**key api endpoints**: 
+  - N/A. (Strictly Frontend Prototype).
+
+**Critical Info for New Agent**: 
+- **NO BACKEND:** Do NOT create FastAPI routes, DB connections, or add Stripe. Everything must remain mocked via  and  files.
+- **LIVE PREVIEW PATTERN:** Every editor requested by the user must have a Left Panel (Form) and a Right Panel (Live Preview matching the public website aesthetic).
+- **TESTING:** Always use  to visually verify the frontend route before calling . Do not use page.goto inside Playwright tests when validating Zustand state across navigations; use in-app clicks to avoid resetting the mock memory state.
+
+**documents and test reports created in this job**:
+  -  (Product Requirements Document, updated iteratively)
+  -  (Empty/Mock)
+  -  through 
+
+**Last 10 User Messages and any pending HUMAN messages**:
+ 1. *User*:  (Completed code, verification pending)
+ 2. *User*:  (Completed)
+ 3. *User*:  (Completed)
+ 4. *User*:  (Completed)
+ 5. *User*:  (Completed)
+ 6. *User*:  (Completed)
+ 7. *User*:  (Completed)
+ 8. *User*:  (Completed)
+ 9. *User*:  (Completed)
+ 10. *User*:  (Completed)
+
+**Project Health Check:**
+- Broken: None
+- Mocked: ENTIRE APP (Backend strictly prohibited)
+
+**3rd Party Integrations**: 
+- None. (No backend or external API keys needed for this frontend prototype).
+
+**Testing status**:
+  - Testing agent used after significant changes: YES (Iterations 1 through 10)
+  - Troubleshoot agent used after agent stuck in loop: NO
+  - Test files created:  through 
+  - Known regressions: None
+
+**Credentials to test flow**:
+  - N/A. There is no auth barrier in this prototype.
+
+**What agent forgot to execute**:
+The agent wrote the code for the final user prompt (MANTENIMIENTO) and compiled successfully but hit the context limit before visually validating it with , testing it with , and delivering the final  summary to the user.</analysis>

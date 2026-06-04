@@ -22,6 +22,7 @@ import ResenasPage from "@/pages/Resenas";
 import IdentidadPage from "@/pages/ajustes/Identidad";
 import DominioPage from "@/pages/ajustes/Dominio";
 import GeneralPage from "@/pages/ajustes/General";
+import MantenimientoPage from "@/pages/ajustes/Mantenimiento";
 import PaginasLista from "@/pages/paginas/Lista";
 import EditorPagina from "@/pages/paginas/EditorPagina";
 import EditarSeccion from "@/pages/paginas/EditarSeccion";
@@ -92,6 +93,7 @@ export default function App() {
           <Route path="/ajustes/identidad" element={<IdentidadPage />} />
           <Route path="/ajustes/dominio" element={<DominioPage />} />
           <Route path="/ajustes/general" element={<GeneralPage />} />
+          <Route path="/ajustes/mantenimiento" element={<MantenimientoPage />} />
 
           <Route path="*" element={<Navigate to="/inicio" replace />} />
         </Route>

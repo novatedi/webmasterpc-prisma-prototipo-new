@@ -362,6 +362,7 @@ export const MODULES: ModuleDef[] = [
     description: "Pon tu web en pausa temporalmente.",
     category: "ajustes-mod",
     defaultActive: false,
+    to: "/ajustes/mantenimiento",
   },
   {
     id: "dominio",

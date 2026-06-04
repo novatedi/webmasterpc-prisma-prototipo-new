@@ -1,5 +1,5 @@
 {
-  "summary": "Frontend-only testing of new Páginas module (compositor de secciones). Lista, EditorPagina, EditarSeccion, AddSectionDialog, WidgetPicker, BackgroundPicker, SectionPreview validated against URL https://prisma-studio-1.preview.emergentagent.com. All 5 seed pages render, all 5 seed sections in p-inicio render with correct kinds, controls and live sync work. One real bug: section visibility toggle does not actually visually dim the band (inline opacity overrides Tailwind class).",
+  "summary": "Frontend-only testing of new Páginas module (compositor de secciones). Lista, EditorPagina, EditarSeccion, AddSectionDialog, WidgetPicker, BackgroundPicker, SectionPreview validated against URL https://estudio-panel.preview.emergentagent.com. All 5 seed pages render, all 5 seed sections in p-inicio render with correct kinds, controls and live sync work. One real bug: section visibility toggle does not actually visually dim the band (inline opacity overrides Tailwind class).",
   "backend_issues": { "critical": [], "minor": [] },
   "frontend_issues": {
     "ui_bugs": [

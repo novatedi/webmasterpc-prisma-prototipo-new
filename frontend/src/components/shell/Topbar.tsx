@@ -57,6 +57,11 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     title: "Prensa",
     subtitle: "Artículos, entrevistas y críticas sobre tu trabajo.",
   },
+  mantenimiento: {
+    title: "Mantenimiento",
+    subtitle:
+      "Activa esto mientras renuevas tu web; tus visitantes verán un aviso amable.",
+  },
   servicios: {
     title: "Servicios",
     subtitle: "Lo que ofreces a tus clientes y galerías.",
@@ -95,6 +100,7 @@ export function Topbar() {
     if (pathname.startsWith("/biblioteca")) return "biblioteca";
     if (pathname.startsWith("/preview-web")) return "preview-web";
     if (pathname.startsWith("/ajustes/identidad")) return "identidad";
+    if (pathname.startsWith("/ajustes/mantenimiento")) return "mantenimiento";
     if (pathname.startsWith("/ajustes")) return "ajustes";
     if (pathname.startsWith("/blog")) return "blog";
     if (pathname.startsWith("/servicios")) return "servicios";
