@@ -52,7 +52,7 @@ function Band({
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.6 : 1,
+    opacity: isDragging ? 0.6 : section.visible ? 1 : 0.6,
   };
 
   return (
@@ -63,7 +63,6 @@ function Band({
       className={cn(
         "overflow-hidden rounded-2xl border border-border bg-card shadow-soft-sm transition-shadow",
         isDragging && "shadow-soft-lg",
-        !section.visible && "opacity-60",
       )}
     >
       {/* Encabezado */}
