@@ -27,14 +27,15 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - Fuente Nunito (redondita, fácil lectura) por elección del usuario.
 - Cero textos hardcodeados en JSX – todo desde data files (preparado para portar a Next.js).
 
-## Implemented (TODA LA APP – P1–P6) – 2026-02-12
+## Implemented (TODA LA APP – P1–P6 + Páginas) – 2026-02-12
 - [x] **P1/6**: Shell + 2 temas + Inicio (dashboard).
 - [x] **P2/6**: Obras (catálogo, categorías, materiales) + editor con preview en vivo.
 - [x] **P3/6**: La empresa con 7 subsecciones + preview público en cada una.
 - [x] **P4/6**: Servicios + Blog con editor y formato.
-- [x] **P5/6**: Consultas (bandeja con KPIs + detalle + acciones) y Reseñas (KPIs + lista con estrellas + 3 acciones).
-- [x] **P6/6**: Ajustes (Identidad con preview en vivo + apply global de color/fuente, Dominio con estado y SSL, General) + sidebar colapsable móvil + dark mode coherente en todas las pantallas + fix a11y del Sheet.
-- [x] Testing E2E total: 9/9 + 38/38 + 81/81 + 25/25 + 16/16 + 100% = **prompts 1–6 todos al 100%**.
+- [x] **P5/6**: Consultas + Reseñas con KPIs y acciones.
+- [x] **P6/6**: Ajustes (Identidad, Dominio, General) + sidebar móvil + dark mode coherente.
+- [x] **Páginas** (extra): compositor con modelo Página→Secciones→Widget. Lista de páginas con drag, editor con bandas (widget picker + background picker + edit content), catálogo de 16 secciones prediseñadas en 5 categorías, editor de sección 2-paneles con preview live.
+- [x] Testing E2E: P1 9/9 · P2 38/38 · P3 81/81 · P4 25/25 · P5 16/16 · P6 100% · Páginas 100% (tras 1 fix).
 
 ## Backlog (P0/P1/P2 para próximos prompts)
 
