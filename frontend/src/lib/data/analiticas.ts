@@ -43,11 +43,29 @@ export interface ViewedPage {
   tiempo: string; // tiempo medio
 }
 
+export interface CityOrigin {
+  city: string;
+  region: string; // país / comunidad
+  visitas: number;
+}
+
+export interface LlmReferral {
+  id: string;
+  source: string; // nombre del buscador IA
+  icon: string; // lucide-react
+  color: string; // color de marca (hex)
+  referrals: number;
+  delta: string; // ej "+24%"
+  trend: "up" | "down";
+}
+
 export interface RangeData {
   kpis: Kpi[];
   traffic: TrafficPoint[];
   works: PopularWork[];
   pages: ViewedPage[];
+  cities: CityOrigin[];
+  llm: LlmReferral[];
 }
 
 const t = (n: number) => n.toLocaleString("es-ES");
@@ -82,6 +100,21 @@ export const ANALYTICS: Record<RangeKey, RangeData> = {
       { path: "/sobre-mi", name: "Biografía", visitas: 1950, tiempo: "3m 12s" },
       { path: "/contacto", name: "Formulario", visitas: 1120, tiempo: "0m 58s" },
     ],
+    cities: [
+      { city: "Madrid", region: "España", visitas: 214 },
+      { city: "Barcelona", region: "España", visitas: 168 },
+      { city: "Valencia", region: "España", visitas: 96 },
+      { city: "Lisboa", region: "Portugal", visitas: 74 },
+      { city: "París", region: "Francia", visitas: 52 },
+      { city: "Ciudad de México", region: "México", visitas: 41 },
+    ],
+    llm: [
+      { id: "chatgpt", source: "ChatGPT", icon: "Sparkles", color: "#10a37f", referrals: 142, delta: "+34%", trend: "up" },
+      { id: "perplexity", source: "Perplexity", icon: "Search", color: "#20b8cd", referrals: 86, delta: "+21%", trend: "up" },
+      { id: "gemini", source: "Google Gemini", icon: "Stars", color: "#4f86f7", referrals: 64, delta: "+12%", trend: "up" },
+      { id: "copilot", source: "Microsoft Copilot", icon: "Bot", color: "#7c4dff", referrals: 38, delta: "+9%", trend: "up" },
+      { id: "claude", source: "Claude", icon: "MessageSquare", color: "#d97757", referrals: 27, delta: "-3%", trend: "down" },
+    ],
   },
   "30d": {
     kpis: [
@@ -109,6 +142,21 @@ export const ANALYTICS: Record<RangeKey, RangeData> = {
       { path: "/sobre-mi", name: "Biografía", visitas: 7980, tiempo: "3m 20s" },
       { path: "/contacto", name: "Formulario", visitas: 4310, tiempo: "1m 04s" },
     ],
+    cities: [
+      { city: "Madrid", region: "España", visitas: 902 },
+      { city: "Barcelona", region: "España", visitas: 712 },
+      { city: "Valencia", region: "España", visitas: 418 },
+      { city: "Lisboa", region: "Portugal", visitas: 326 },
+      { city: "París", region: "Francia", visitas: 248 },
+      { city: "Ciudad de México", region: "México", visitas: 196 },
+    ],
+    llm: [
+      { id: "chatgpt", source: "ChatGPT", icon: "Sparkles", color: "#10a37f", referrals: 612, delta: "+41%", trend: "up" },
+      { id: "perplexity", source: "Perplexity", icon: "Search", color: "#20b8cd", referrals: 358, delta: "+28%", trend: "up" },
+      { id: "gemini", source: "Google Gemini", icon: "Stars", color: "#4f86f7", referrals: 274, delta: "+18%", trend: "up" },
+      { id: "copilot", source: "Microsoft Copilot", icon: "Bot", color: "#7c4dff", referrals: 162, delta: "+11%", trend: "up" },
+      { id: "claude", source: "Claude", icon: "MessageSquare", color: "#d97757", referrals: 118, delta: "+6%", trend: "up" },
+    ],
   },
   "90d": {
     kpis: [
@@ -134,6 +182,21 @@ export const ANALYTICS: Record<RangeKey, RangeData> = {
       { path: "/obras", name: "Catálogo de Esculturas", visitas: 47120, tiempo: "3m 04s" },
       { path: "/sobre-mi", name: "Biografía", visitas: 24850, tiempo: "3m 28s" },
       { path: "/contacto", name: "Formulario", visitas: 13420, tiempo: "1m 11s" },
+    ],
+    cities: [
+      { city: "Madrid", region: "España", visitas: 2810 },
+      { city: "Barcelona", region: "España", visitas: 2240 },
+      { city: "Valencia", region: "España", visitas: 1320 },
+      { city: "Lisboa", region: "Portugal", visitas: 1040 },
+      { city: "París", region: "Francia", visitas: 812 },
+      { city: "Ciudad de México", region: "México", visitas: 648 },
+    ],
+    llm: [
+      { id: "chatgpt", source: "ChatGPT", icon: "Sparkles", color: "#10a37f", referrals: 1980, delta: "+52%", trend: "up" },
+      { id: "perplexity", source: "Perplexity", icon: "Search", color: "#20b8cd", referrals: 1142, delta: "+33%", trend: "up" },
+      { id: "gemini", source: "Google Gemini", icon: "Stars", color: "#4f86f7", referrals: 864, delta: "+24%", trend: "up" },
+      { id: "copilot", source: "Microsoft Copilot", icon: "Bot", color: "#7c4dff", referrals: 512, delta: "+15%", trend: "up" },
+      { id: "claude", source: "Claude", icon: "MessageSquare", color: "#d97757", referrals: 386, delta: "+9%", trend: "up" },
     ],
   },
 };

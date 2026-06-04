@@ -33,6 +33,10 @@ export const ANALITICAS = {
   worksChart: "analiticas-works-chart",
   pagesTable: "analiticas-pages-table",
   pageRow: (path: string) => `analiticas-page-row-${path}`,
+  citiesCard: "analiticas-cities-card",
+  cityRow: (city: string) => `analiticas-city-row-${city}`,
+  llmCard: "analiticas-llm-card",
+  llmRow: (id: string) => `analiticas-llm-row-${id}`,
 };
 
 export const PAGES = {

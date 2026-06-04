@@ -44,6 +44,7 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
   - AreaChart "Tráfico y navegación" (visitantes vs obras vistas).
   - BarChart horizontal "Obras más populares".
   - Tabla "Páginas más vistas" (ruta + nombre + visitas + tiempo medio).
+  - **Ampliación (2026-06-04):** tarjeta "Ciudades de origen" (lista con barras + %) y tarjeta "Buscadores IA / LLM Referrals" (ChatGPT, Perplexity, Gemini, Copilot, Claude con icono de marca, conteo de referidos y tendencia %). Datos por rango en `lib/data/analiticas.ts` (campos `cities`, `llm`).
   - Archivos: `pages/Analiticas.tsx`, `lib/data/analiticas.ts`, ruta `/analiticas`, módulo en `modules.ts` con `to:/analiticas`, títulos en `Topbar.tsx`, testIds `ANALITICAS`.
 
 ## Backlog (P0/P1/P2 para próximos prompts)

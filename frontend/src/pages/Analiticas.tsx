@@ -51,6 +51,10 @@ export default function AnaliticasPage() {
   const [range, setRange] = useState<RangeKey>("7d");
   const data = ANALYTICS[range];
 
+  const citiesTotal = data.cities.reduce((a, c) => a + c.visitas, 0);
+  const citiesMax = Math.max(...data.cities.map((c) => c.visitas));
+  const llmTotal = data.llm.reduce((a, l) => a + l.referrals, 0);
+
   return (
     <div data-testid={ANALITICAS.page} className="flex flex-col gap-8">
       {/* Cabecera */}
@@ -327,6 +331,135 @@ export default function AnaliticasPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Ciudades de origen + Buscadores IA */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Ciudades de origen */}
+        <Card
+          data-testid={ANALITICAS.citiesCard}
+          className="rounded-2xl border-border bg-card shadow-soft-sm"
+        >
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <Icon name="MapPin" className="h-5 w-5 text-primary" strokeWidth={2} />
+              Ciudades de origen
+            </CardTitle>
+            <p className="text-xs text-muted-foreground">
+              De dónde nos visitan tus clientes
+            </p>
+          </CardHeader>
+          <CardContent className="pt-2">
+            <ul className="flex flex-col gap-4">
+              {data.cities.map((c) => {
+                const pct = Math.round((c.visitas / citiesTotal) * 100);
+                return (
+                  <li
+                    key={c.city}
+                    data-testid={ANALITICAS.cityRow(c.city)}
+                    className="flex flex-col gap-1.5"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <span className="text-sm font-bold text-foreground">
+                          {c.city}
+                        </span>
+                        <span className="ml-2 text-xs text-muted-foreground">
+                          {c.region}
+                        </span>
+                      </div>
+                      <div className="flex shrink-0 items-baseline gap-2">
+                        <span className="text-sm font-bold text-foreground">
+                          {c.visitas.toLocaleString("es-ES")}
+                        </span>
+                        <span className="text-xs font-semibold text-muted-foreground">
+                          {pct}%
+                        </span>
+                      </div>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className="h-full rounded-full bg-primary transition-all"
+                        style={{ width: `${(c.visitas / citiesMax) * 100}%` }}
+                      />
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </CardContent>
+        </Card>
+
+        {/* Buscadores IA (LLM Referrals) */}
+        <Card
+          data-testid={ANALITICAS.llmCard}
+          className="rounded-2xl border-border bg-card shadow-soft-sm"
+        >
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <Icon name="Bot" className="h-5 w-5 text-primary" strokeWidth={2} />
+              Buscadores IA
+            </CardTitle>
+            <p className="text-xs text-muted-foreground">
+              Visitas que llegan desde asistentes de IA como ChatGPT o Perplexity
+            </p>
+          </CardHeader>
+          <CardContent className="pt-2">
+            <ul className="flex flex-col">
+              {data.llm.map((l) => {
+                const pct = Math.round((l.referrals / llmTotal) * 100);
+                return (
+                  <li
+                    key={l.id}
+                    data-testid={ANALITICAS.llmRow(l.id)}
+                    className="flex items-center gap-3 border-b border-border/70 py-3 last:border-b-0"
+                  >
+                    <span
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white"
+                      style={{ background: l.color }}
+                    >
+                      <Icon name={l.icon} className="h-5 w-5" strokeWidth={2} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="truncate text-sm font-bold text-foreground">
+                          {l.source}
+                        </span>
+                        <span className="shrink-0 text-sm font-bold text-foreground">
+                          {l.referrals.toLocaleString("es-ES")}
+                        </span>
+                      </div>
+                      <div className="mt-0.5 flex items-center justify-between gap-2">
+                        <span className="text-xs text-muted-foreground">
+                          {pct}% del total IA
+                        </span>
+                        <span
+                          className={cn(
+                            "flex items-center gap-1 text-xs font-semibold",
+                            l.trend === "up"
+                              ? "text-emerald-600 dark:text-emerald-400"
+                              : "text-rose-600 dark:text-rose-400",
+                          )}
+                        >
+                          <Icon
+                            name={l.trend === "up" ? "TrendingUp" : "TrendingDown"}
+                            className="h-3.5 w-3.5"
+                          />
+                          {l.delta}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-4 flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
+              <Icon name="Info" className="h-4 w-4 shrink-0 text-primary" />
+              Cada vez más gente descubre tu web preguntando a un asistente de
+              IA. Mantén tus textos claros para aparecer en sus respuestas.
             </div>
           </CardContent>
         </Card>
