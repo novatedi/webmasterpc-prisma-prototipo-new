@@ -266,6 +266,7 @@ export const MODULES: ModuleDef[] = [
     description: "Visitas, fuentes y conversión.",
     category: "marketing",
     defaultActive: false,
+    to: "/analiticas",
   },
   {
     id: "copiloto-ia",

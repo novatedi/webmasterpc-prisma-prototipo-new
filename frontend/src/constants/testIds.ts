@@ -23,6 +23,18 @@ export const HOME = {
   quickActionItem: (id: string) => `quick-action-${id}`,
 };
 
+export const ANALITICAS = {
+  page: "page-analiticas",
+  rangeSelector: "analiticas-range",
+  rangeOption: (key: string) => `analiticas-range-${key}`,
+  kpis: "analiticas-kpis",
+  kpi: (id: string) => `analiticas-kpi-${id}`,
+  trafficChart: "analiticas-traffic-chart",
+  worksChart: "analiticas-works-chart",
+  pagesTable: "analiticas-pages-table",
+  pageRow: (path: string) => `analiticas-page-row-${path}`,
+};
+
 export const PAGES = {
   empresa: "page-empresa",
   servicios: "page-servicios",

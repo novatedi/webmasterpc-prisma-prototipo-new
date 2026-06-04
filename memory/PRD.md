@@ -37,6 +37,15 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - [x] **Páginas** (extra): compositor con modelo Página→Secciones→Widget. Lista de páginas con drag, editor con bandas (widget picker + background picker + edit content), catálogo de 16 secciones prediseñadas en 5 categorías, editor de sección 2-paneles con preview live.
 - [x] Testing E2E: P1 9/9 · P2 38/38 · P3 81/81 · P4 25/25 · P5 16/16 · P6 100% · Páginas 100% (tras 1 fix).
 
+## Implemented (extras) – 2026-06-04
+- [x] **Mantenimiento** (Ajustes): editor 2-paneles + pantalla pública "Volvemos pronto" (verificado por usuario).
+- [x] **Analíticas & Métricas** (módulo activable, marketing): solo lectura, datos mock por rango (7/30/90 días).
+  - Selector de rango, 4 KPIs (visitas únicas, páginas vistas +18%, tiempo medio 2m 25s, rebote 38%).
+  - AreaChart "Tráfico y navegación" (visitantes vs obras vistas).
+  - BarChart horizontal "Obras más populares".
+  - Tabla "Páginas más vistas" (ruta + nombre + visitas + tiempo medio).
+  - Archivos: `pages/Analiticas.tsx`, `lib/data/analiticas.ts`, ruta `/analiticas`, módulo en `modules.ts` con `to:/analiticas`, títulos en `Topbar.tsx`, testIds `ANALITICAS`.
+
 ## Backlog (P0/P1/P2 para próximos prompts)
 
 ### Mejoras futuras (post-P6)

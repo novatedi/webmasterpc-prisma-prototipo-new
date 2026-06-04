@@ -57,6 +57,11 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     title: "Prensa",
     subtitle: "Artículos, entrevistas y críticas sobre tu trabajo.",
   },
+  analiticas: {
+    title: "Analíticas & Métricas",
+    subtitle:
+      "Supervisa el rendimiento de tu web: visitas, obras más populares y tráfico.",
+  },
   mantenimiento: {
     title: "Mantenimiento",
     subtitle:
@@ -108,6 +113,7 @@ export function Topbar() {
     if (pathname.startsWith("/resenas")) return "resenas";
     if (pathname.startsWith("/modulos")) return "modulos";
     if (pathname.startsWith("/prensa")) return "prensa";
+    if (pathname.startsWith("/analiticas")) return "analiticas";
     return "inicio";
   })();
   const meta = titles[sectionId] ?? titles.inicio;
