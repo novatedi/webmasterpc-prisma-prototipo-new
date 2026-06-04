@@ -53,6 +53,10 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     title: "Módulo",
     subtitle: "Este módulo se está preparando.",
   },
+  prensa: {
+    title: "Prensa",
+    subtitle: "Artículos, entrevistas y críticas sobre tu trabajo.",
+  },
   servicios: {
     title: "Servicios",
     subtitle: "Lo que ofreces a tus clientes y galerías.",
@@ -97,6 +101,7 @@ export function Topbar() {
     if (pathname.startsWith("/consultas")) return "consultas";
     if (pathname.startsWith("/resenas")) return "resenas";
     if (pathname.startsWith("/modulos")) return "modulos";
+    if (pathname.startsWith("/prensa")) return "prensa";
     return "inicio";
   })();
   const meta = titles[sectionId] ?? titles.inicio;

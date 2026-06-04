@@ -29,6 +29,8 @@ import FuncionesPage from "@/pages/Funciones";
 import ModuloPlaceholder from "@/pages/ModuloPlaceholder";
 import PreviewWebPage from "@/pages/PreviewWeb";
 import BibliotecaPage from "@/pages/Biblioteca";
+import PrensaLista from "@/pages/prensa/Lista";
+import EditarPrensa from "@/pages/prensa/Editar";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -58,6 +60,10 @@ export default function App() {
           <Route path="/biblioteca" element={<BibliotecaPage />} />
           <Route path="/preview-web" element={<PreviewWebPage />} />
           <Route path="/modulos/:id" element={<ModuloPlaceholder />} />
+
+          <Route path="/prensa" element={<PrensaLista />} />
+          <Route path="/prensa/articulo/nuevo" element={<EditarPrensa />} />
+          <Route path="/prensa/articulo/:id" element={<EditarPrensa />} />
 
           <Route path="/servicios" element={<ServiciosLista />} />
           <Route path="/servicios/bloque/nuevo" element={<EditarServicio />} />

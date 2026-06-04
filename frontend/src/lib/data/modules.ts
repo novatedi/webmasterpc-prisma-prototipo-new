@@ -97,6 +97,7 @@ export const MODULES: ModuleDef[] = [
     description: "Reseñas en prensa y enlaces a artículos.",
     category: "contenido",
     defaultActive: true,
+    to: "/prensa",
   },
   {
     id: "exposiciones",
