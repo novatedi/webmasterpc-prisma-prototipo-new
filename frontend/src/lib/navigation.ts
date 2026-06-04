@@ -39,6 +39,12 @@ export const sections: Section[] = [
     ],
   },
   {
+    id: "paginas",
+    label: "Páginas",
+    icon: "Layout",
+    to: "/paginas",
+  },
+  {
     id: "servicios",
     label: "Servicios",
     icon: "Boxes",

@@ -27,6 +27,11 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     title: "La empresa",
     subtitle: "Cuenta tu historia, tu biografía y cómo contactarte.",
   },
+  paginas: {
+    title: "Páginas",
+    subtitle:
+      "Compón cada página combinando secciones prediseñadas. Arrastra para ordenar.",
+  },
   servicios: {
     title: "Servicios",
     subtitle: "Lo que ofreces a tus clientes y galerías.",

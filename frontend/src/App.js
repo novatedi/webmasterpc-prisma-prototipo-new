@@ -22,6 +22,9 @@ import ResenasPage from "@/pages/Resenas";
 import IdentidadPage from "@/pages/ajustes/Identidad";
 import DominioPage from "@/pages/ajustes/Dominio";
 import GeneralPage from "@/pages/ajustes/General";
+import PaginasLista from "@/pages/paginas/Lista";
+import EditorPagina from "@/pages/paginas/EditorPagina";
+import EditarSeccion from "@/pages/paginas/EditarSeccion";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 
@@ -42,6 +45,10 @@ export default function App() {
           <Route path="/empresa/proceso" element={<ProcesoPage />} />
           <Route path="/empresa/contacto" element={<ContactoPage />} />
           <Route path="/empresa/redes" element={<RedesPage />} />
+
+          <Route path="/paginas" element={<PaginasLista />} />
+          <Route path="/paginas/:pageId" element={<EditorPagina />} />
+          <Route path="/paginas/:pageId/seccion/:sectionId" element={<EditarSeccion />} />
 
           <Route path="/servicios" element={<ServiciosLista />} />
           <Route path="/servicios/bloque/nuevo" element={<EditarServicio />} />

@@ -222,3 +222,33 @@ export const AJUSTES = {
   generalEmail: "ajustes-general-email",
   generalSave: "ajustes-general-save",
 };
+
+export const PAGINAS = {
+  list: "paginas-list",
+  row: (id: string) => `page-row-${id}`,
+  addBtn: "page-add",
+  toggleVisible: (id: string) => `page-visible-${id}`,
+  remove: (id: string) => `page-remove-${id}`,
+  // Editor de página
+  editor: "page-editor",
+  band: (id: string) => `section-band-${id}`,
+  bandToggle: (id: string) => `section-toggle-${id}`,
+  bandRemove: (id: string) => `section-remove-${id}`,
+  bandEdit: (id: string) => `section-edit-${id}`,
+  bandWidget: (id: string) => `section-widget-${id}`,
+  bandBg: (id: string) => `section-bg-${id}`,
+  addSectionBtn: "add-section-btn",
+  catalogSearch: "catalog-search",
+  catalogFilter: (cat: string) => `catalog-filter-${cat}`,
+  catalogCard: (kind: string) => `catalog-card-${kind}`,
+  // Editor de sección
+  sectionEditor: "section-editor",
+  sectionPreview: "section-preview",
+  contentTitle: "content-title",
+  contentSubtitle: "content-subtitle",
+  contentBody: "content-body",
+  contentCtaText: "content-cta-text",
+  contentCtaHref: "content-cta-href",
+  contentImage: "content-image",
+  contentImageBtn: "content-image-btn",
+};
