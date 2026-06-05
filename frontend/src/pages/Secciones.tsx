@@ -12,12 +12,15 @@ import { SECCIONES } from "@/constants/testIds";
 export default function SeccionesPage() {
   const role = useRoleStore((s) => s.role);
   const setRole = useRoleStore((s) => s.setRole);
-  const getSection = useSeccionesStore((s) => s.getSection);
 
   const [openId, setOpenId] = useState<string | null>(null);
   const [showCreate, setShowCreate] = useState(false);
 
-  const current = openId ? getSection(openId) : undefined;
+  // Suscribimos el array `sections` (no la función getSection) para que el
+  // detalle se re-renderice cuando el admin edita slots/presets.
+  const current = useSeccionesStore((s) =>
+    openId ? s.sections.find((x) => x.id === openId) : undefined,
+  );
 
   return (
     <div data-testid={SECCIONES.page} className="flex flex-col gap-8">
