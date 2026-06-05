@@ -320,6 +320,7 @@ export const MODULES: ModuleDef[] = [
     description: "Más secciones prediseñadas para tus páginas.",
     category: "diseno",
     defaultActive: false,
+    to: "/secciones",
   },
   {
     id: "propuestas-ia",

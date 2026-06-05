@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only e2e test of módulo SECCIONES (/secciones). Verified catálogo (header, info card, search, 8 cards, 8 category filters incl. 'todas', empty state), CTA-filter behaviour, detalle (presets chips, preview render change, añadir a página with disabled→toast flow, back button), role-gating (cliente read-only sin create-btn, admin con nota + controles), creación de sección (Testimonios añadida y abierta en detalle, también en catálogo), módulo en /funciones (toggle añade item en sidebar) y dark mode legible. CRITICAL bug detected: en la vista DETALLE, las acciones de edición admin (renombrar slot, añadir slot, añadir preset, switch requerido, eliminar slot, cambiar tipo) no refrescan la UI porque DetalleSeccion y Secciones.tsx solo suscriben funciones del store (referencias estables), no el array sections. La mutación del store ocurre pero la UI no re-renderiza.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DetalleSeccion.tsx + pages/Secciones.tsx", "issue": "Las ediciones admin en el detalle (rename slot, add-slot-btn, add-preset-btn, switch requerido, papelera, cambio de tipo) no se reflejan en la UI. La store sí muta pero el componente no se re-renderiza porque solo suscribe funciones estables (updateSlots, addPreset, getSection). Detalle se mantiene mostrando los datos originales aunque el estado cambie.", "selector": "[data-testid=\"secciones-slots-table\"], [data-testid=\"secciones-add-slot-btn\"], [data-testid=\"secciones-add-preset-btn\"]", "priority": "HIGH"}
+    ],
+    "integration_issues": [
+      {"flow": "Admin edición de catálogo en detalle", "issue": "Reactividad rota Zustand: clicks en add-slot/add-preset no añaden filas/chips visibles. Confirmado en sección seed (hero) y en sección nueva creada (Testimonios → rename de 'Título' a 'Cita destacada' no actualiza el input visible).", "affected_selectors": ["[data-testid=\"secciones-add-slot-btn\"]", "[data-testid=\"secciones-add-preset-btn\"]", "[data-testid=\"secciones-slots-table\"] input"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Corregir reactividad en /app/frontend/src/pages/Secciones.tsx: en lugar de `const getSection = useSeccionesStore(s => s.getSection)` y luego `current = getSection(openId)`, suscribirse al array `sections` o derivar `current` directamente del selector. Ejemplo: `const current = useSeccionesStore(s => openId ? s.sections.find(x => x.id === openId) : undefined);` Esto fuerza re-render cuando la lista cambia y propaga el nuevo `section` como prop a `<DetalleSeccion />`, haciendo que la tabla de slots y los chips de presets reflejen los cambios.",
+    "Tras el fix, re-verificar: 1) renombrar campo en tabla de slots, 2) secciones-add-slot-btn añade nueva fila, 3) secciones-add-preset-btn añade chip, 4) switch requerido actualiza, 5) papelera elimina fila, 6) cambio de tipo en Select se persiste visualmente."
+  ],
+  "critical_code_review_comments": [
+    "stores/secciones-store.ts L18: `SECCIONES_SEED.map(s => ({ ...s }))` hace clone superficial. Los arrays `slots` y `presets` quedan compartidos por referencia con el seed; en updateSlots se reemplaza con un nuevo array (OK), pero addPreset hace `[...sec.presets, preset]` (también OK). No es bug, pero deepCloning con `structuredClone` sería más seguro frente a futuras mutaciones in-place.",
+    "pages/Secciones.tsx: el patrón `useSeccionesStore(s => s.getSection)` devuelve la MISMA referencia de función en cada render, por lo que Zustand nunca dispara re-render cuando cambia `sections`. Mismo problema con `updateSlots`/`addPreset` en DetalleSeccion. Es el origen del bug visible. CatalogoSecciones funciona bien porque suscribe `s.sections` directamente.",
+    "DetalleSeccion.tsx L40: `useState(section.presets[0]?.id ?? '')` inicializa preset solo en mount. Si el usuario añade un preset desde admin, el state local no se sincroniza con cambios externos del array (no es crítico, pero conviene). Tras corregir la reactividad esto sigue siendo correcto porque el seleccionado por defecto no cambia."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "~85% (10/12 flows OK; admin-edit en detalle falla por reactividad)"},
+  "test_credentials": "n/a (sin auth, rol simulado vía secciones-role-admin)",
+  "seed_data_creation": "Sección 'Testimonios' creada en runtime para probar flujo crear (no persiste tras reload)",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Tras aplicar el fix de reactividad (suscribirse a sections en Secciones.tsx), retestear sólo las acciones admin en DetalleSeccion: renombrar slot vía teclado (Control+A → Delete → type), click en secciones-add-slot-btn debe sumar 1 input en [data-testid=secciones-slots-table] input, click en secciones-add-preset-btn debe sumar 1 chip [data-testid^=secciones-preset-]. Probar tanto en sección seed (hero) como en una creada al vuelo. El resto del módulo (catálogo, búsqueda, filtros, vacío, role gating, dialogo crear, add to page, dark mode, activación módulo) ya está verificado y funciona.",
+  "rca of the issue": "Zustand reactivity bug. Componentes que escriben en el store sólo seleccionan funciones del store (s.updateSlots, s.addPreset, s.getSection). Estas referencias son estables; el selector de Zustand compara con Object.is y nunca detecta cambio, por lo que el componente no re-renderiza tras una mutación. La store muta correctamente (verificado: addSection sí refresca el catálogo porque CatalogoSecciones suscribe `s.sections`). Reproducción: ir a /secciones → switch a Admin → abrir cualquier card → click 'Añadir campo' o 'Añadir preset': nada cambia visualmente, sin errores en consola. Mitigación: en pages/Secciones.tsx derivar `current` con un selector que dependa de `sections` (ej. `useSeccionesStore(s => s.sections.find(x => x.id === openId))`), o suscribir `sections` por separado y calcular `current` con `useMemo`."
+}

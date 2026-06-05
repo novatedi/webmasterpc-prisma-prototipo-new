@@ -33,6 +33,7 @@ import BibliotecaPage from "@/pages/Biblioteca";
 import PrensaLista from "@/pages/prensa/Lista";
 import AnaliticasPage from "@/pages/Analiticas";
 import LegalPage from "@/pages/Legal";
+import SeccionesPage from "@/pages/Secciones";
 import EditarPrensa from "@/pages/prensa/Editar";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/preview-web" element={<PreviewWebPage />} />
           <Route path="/analiticas" element={<AnaliticasPage />} />
           <Route path="/legal" element={<LegalPage />} />
+          <Route path="/secciones" element={<SeccionesPage />} />
           <Route path="/modulos/:id" element={<ModuloPlaceholder />} />
 
           <Route path="/prensa" element={<PrensaLista />} />

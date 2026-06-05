@@ -62,6 +62,36 @@ export const LEGAL = {
   publishedList: "legal-published-list",
 };
 
+export const SECCIONES = {
+  page: "page-secciones",
+  roleToggle: "secciones-role-toggle",
+  roleCliente: "secciones-role-cliente",
+  roleAdmin: "secciones-role-admin",
+  infoCard: "secciones-info-card",
+  search: "secciones-search",
+  filterCat: (c: string) => `secciones-filter-${c}`,
+  grid: "secciones-grid",
+  card: (id: string) => `secciones-card-${id}`,
+  empty: "secciones-empty",
+  createBtn: "secciones-create-btn",
+  detail: "secciones-detail",
+  backBtn: "secciones-back-btn",
+  presetChip: (id: string) => `secciones-preset-${id}`,
+  preview: "secciones-preview",
+  pageSelect: "secciones-page-select",
+  addToPageBtn: "secciones-add-to-page-btn",
+  slotsTable: "secciones-slots-table",
+  addSlotBtn: "secciones-add-slot-btn",
+  addPresetBtn: "secciones-add-preset-btn",
+  // dialog crear
+  dlgName: "secciones-dlg-name",
+  dlgCategory: "secciones-dlg-category",
+  dlgAddSlot: "secciones-dlg-add-slot",
+  dlgSlotName: (i: number) => `secciones-dlg-slot-name-${i}`,
+  dlgPreset: "secciones-dlg-preset",
+  dlgSubmit: "secciones-dlg-submit",
+};
+
 export const PAGES = {
   empresa: "page-empresa",
   servicios: "page-servicios",
