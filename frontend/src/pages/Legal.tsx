@@ -12,16 +12,6 @@ export default function LegalPage() {
 
   return (
     <div data-testid={LEGAL.page} className="flex flex-col gap-8">
-      <div>
-        <h2 className="text-2xl font-extrabold tracking-tight">
-          Textos Legales &amp; Privacidad
-        </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Genera los textos legales obligatorios de tu web (RGPD + LSSI, España)
-          o usa los tuyos.
-        </p>
-      </div>
-
       <LegalDisclaimer />
 
       <AsistenteGeneracion />

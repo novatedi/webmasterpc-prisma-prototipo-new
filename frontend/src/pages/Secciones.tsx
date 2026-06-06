@@ -24,16 +24,8 @@ export default function SeccionesPage() {
 
   return (
     <div data-testid={SECCIONES.page} className="flex flex-col gap-8">
-      {/* Cabecera + selector de rol */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div>
-          <h2 className="text-2xl font-extrabold tracking-tight">Secciones</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            El catálogo de secciones prediseñadas de tu web. Explora,
-            previsualiza y añádelas a tus páginas.
-          </p>
-        </div>
-
+      {/* Selector de rol */}
+      <div className="flex justify-end">
         <div
           data-testid={SECCIONES.roleToggle}
           className="inline-flex shrink-0 items-center gap-1 rounded-xl border border-border bg-card p-1"

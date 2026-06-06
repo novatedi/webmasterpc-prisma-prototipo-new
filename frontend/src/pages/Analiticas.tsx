@@ -57,19 +57,8 @@ export default function AnaliticasPage() {
 
   return (
     <div data-testid={ANALITICAS.page} className="flex flex-col gap-8">
-      {/* Cabecera */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <h2 className="text-2xl font-extrabold tracking-tight">
-            Analíticas &amp; Métricas
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Supervisa el rendimiento de tu web: visitas, obras más populares y
-            tráfico.
-          </p>
-        </div>
-
-        {/* Selector de rango */}
+      {/* Selector de rango */}
+      <div className="flex justify-end">
         <div
           data-testid={ANALITICAS.rangeSelector}
           className="inline-flex shrink-0 items-center gap-1 rounded-xl border border-border bg-card p-1"

@@ -1,0 +1,46 @@
+{
+  "summary": "Frontend-only review of Prisma Studio shell redesign: ZonesBar removed; zone selector moved into sidebar (DropdownMenu); page title relocated to topbar (resolveMeta by route). All requested behaviors verified end-to-end on the public URL.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/analiticas (and any page mounting Recharts inside a hidden/collapsed container at first paint)", "issues": ["Recharts warnings repeated in console: 'The width(-1) and height(-1) of chart should be greater than 0'. Functional impact: none (charts render correctly after layout). Suggestion: set minWidth/minHeight on ResponsiveContainer parent or aspect ratio to silence."]}
+    ]
+  },
+  "verifications_passed": [
+    "Old ZonesBar component is gone (no [data-testid=zones-bar] in DOM).",
+    "Sidebar shows 'ZONA ACTIVA' label and [data-testid=zone-selector] with current zone (default 'Web' + Globe2 icon).",
+    "Dropdown opens and exposes all 7 options: zone-option-web|diseno|ia|marketing|clientes|tienda|ajustes. Active zone shows Check icon.",
+    "Selecting 'Diseño' replaces sidebar items with: zone-item-paginas, zone-item-secciones, zone-item-temas, zone-item-modulos, zone-item-efectos.",
+    "Selecting 'Ajustes' shows: zone-item-general, zone-item-idiomas, zone-item-ubicaciones, zone-item-mantenimiento, zone-item-equipo, zone-item-marketplace.",
+    "Topbar [data-testid=app-topbar]: left = topbar-title + subtitle; right = theme-toggle, topbar-notifications, topbar-user-avatar ('Alejandro / Mi cuenta'). No gear/Settings cog in the topbar action row.",
+    "Topbar title verified per route: /inicio='¡Bienvenido, Alejandro!', /empresa/historia='La empresa', /servicios='Servicios', /obras/catalogo='Obras', /blog/articulos='Blog', /paginas='Páginas', /secciones='Secciones', /analiticas='Analíticas & Métricas', /consultas='Consultas', /resenas='Reseñas', /ajustes/general='General y dominio', /ajustes/mantenimiento='Mantenimiento', /ajustes/identidad='Identidad'.",
+    "No duplicated headers: /inicio, /analiticas and /secciones contain 0 <h1> elements inside <main> (title only in topbar).",
+    "/analiticas still shows the 7/30/90 días range selector. /secciones still shows the 'Ver como Cliente/Admin' selector.",
+    "Sidebar collapse: width 260 → 76 on toggle of [data-testid=sidebar-collapse-btn]; zone-selector remains visible (icon-only). Expand restores labels.",
+    "Pronto items (e.g. 'Temas') navigate to /proximamente/temas and topbar title reads 'Temas'. Active items (e.g. 'Páginas') navigate to /paginas with title 'Páginas'.",
+    "Zone auto-syncs with URL on direct navigation: loading /ajustes/general makes the zone selector display 'Ajustes'.",
+    "Dark mode via [data-testid=theme-toggle] toggles html.dark and keeps sidebar/selector/topbar/content legible.",
+    "Mobile (390x844): [data-testid=topbar-menu-btn] opens a left Sheet drawer containing the expanded Sidebar (with zone selector + items).",
+    "0 console errors during the full flow; only non-functional Recharts width/height warnings."
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Optional: silence Recharts ResponsiveContainer warnings by guaranteeing non-zero parent height (e.g. add explicit min-height) on Analíticas/Inicio chart containers."
+  ],
+  "critical_code_review_comments": [
+    "Sidebar.tsx uses asChild on DropdownMenuTrigger with a custom <button>: OK; aria-label could be added to the trigger for screen readers (currently relies on visible label + ChevronsUpDown icon).",
+    "Topbar.tsx resolveMeta() falls back to 'inicio' meta for unknown routes; consider a 404-aware default to avoid showing '¡Bienvenido, Alejandro!' on truly unknown paths.",
+    "zones.ts still exports TOPBAR_ZONES and AJUSTES_ZONE, both of which are now dead exports after removing the top ZonesBar/gear. Safe to delete to avoid confusion.",
+    "Topbar testids are 'topbar-notifications' and 'topbar-user-avatar' (not 'notifications'/'user-avatar' as informally written in the spec). Confirmed in /app/frontend/src/constants/testIds.ts — keep as-is."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "N/A (skipped)", "frontend": "100%" },
+  "test_credentials": "n/a (no auth)",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Sidebar zone item testids follow the pattern zone-item-{id} (NOT zone-sidebar-item-{id}). Zone dropdown trigger is zone-selector; options are zone-option-{id}. Topbar testids: app-topbar, topbar-title, theme-toggle, topbar-notifications, topbar-user-avatar, topbar-menu-btn, sidebar-collapse-btn, sidebar. Zustand state (active zone, sidebar collapsed) resets on reload; do flows in a single navigation. Recharts warnings in console are pre-existing and non-blocking.",
+  "rca of the issue": "n/a — no defects reproduced."
+}

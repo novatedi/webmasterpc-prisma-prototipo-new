@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
-import { ZonesBar } from "./ZonesBar";
 import { ContentTabs } from "./ContentTabs";
 import { SHELL } from "@/constants/testIds";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
@@ -49,9 +48,8 @@ export function AppShell() {
         </SheetContent>
       </Sheet>
 
-      {/* Columna de contenido: barra de zonas + topbar + contenido */}
+      {/* Columna de contenido: topbar (título + perfil) + contenido */}
       <div className="flex h-full min-w-0 flex-1 flex-col">
-        <ZonesBar />
         <Topbar />
         <ContentTabs />
         <main className="scrollbar-soft flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8 md:py-8">

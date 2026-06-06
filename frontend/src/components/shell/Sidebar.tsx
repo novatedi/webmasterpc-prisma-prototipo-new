@@ -5,6 +5,12 @@ import { SHELL } from "@/constants/testIds";
 import { useZoneStore } from "@/stores/zone-store";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import { ZONES, itemMatches, type ZoneItem } from "@/lib/data/zones";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function BrandLogo({ className }: { className?: string }) {
   return (
@@ -18,6 +24,7 @@ function BrandLogo({ className }: { className?: string }) {
 export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) {
   const { pathname } = useLocation();
   const activeZone = useZoneStore((s) => s.activeZone);
+  const setActiveZone = useZoneStore((s) => s.setActiveZone);
   const collapsedStore = useSidebarStore((s) => s.collapsed);
   const toggleCollapsed = useSidebarStore((s) => s.toggleCollapsed);
   const collapsed = forceExpanded ? false : collapsedStore;
@@ -47,35 +54,58 @@ export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) 
         )}
       </div>
 
-      {/* Cabecera de zona */}
-      <div
-        className={cn(
-          "mx-3 mb-2 mt-3 flex items-center gap-2.5 rounded-xl bg-sidebar-accent/40 px-3 py-2.5",
-          collapsed && "mx-2 justify-center px-0",
-        )}
-      >
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <Icon name={zone.icon} className="h-[18px] w-[18px]" strokeWidth={2} />
-        </span>
+      {/* Selector de zona */}
+      <div className={cn("px-3 pt-5", collapsed && "px-2")}>
         {!collapsed && (
-          <div className="leading-tight">
-            <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-sidebar-muted">
-              Zona
-            </div>
-            <div className="text-sm font-extrabold tracking-tight">{zone.label}</div>
+          <div className="mb-1.5 px-1 text-[10px] font-bold uppercase tracking-[0.16em] text-sidebar-muted">
+            Zona activa
           </div>
         )}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              data-testid={SHELL.zoneSelector}
+              className={cn(
+                "flex w-full items-center gap-2.5 rounded-xl border border-sidebar-border bg-sidebar-accent/40 px-3 py-2.5 text-left transition-colors hover:bg-sidebar-accent/70",
+                collapsed && "justify-center px-0",
+              )}
+            >
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Icon name={zone.icon} className="h-[18px] w-[18px]" strokeWidth={2} />
+              </span>
+              {!collapsed && (
+                <>
+                  <span className="flex-1 truncate text-sm font-extrabold tracking-tight">
+                    {zone.label}
+                  </span>
+                  <Icon name="ChevronsUpDown" className="h-4 w-4 shrink-0 text-sidebar-muted" />
+                </>
+              )}
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-56">
+            {ZONES.map((z) => (
+              <DropdownMenuItem
+                key={z.id}
+                data-testid={SHELL.zoneOption(z.id)}
+                onClick={() => setActiveZone(z.id)}
+                className={cn("gap-2.5", z.id === activeZone && "bg-accent font-bold")}
+              >
+                <Icon name={z.icon} className="h-4 w-4 text-primary" strokeWidth={2} />
+                {z.label}
+                {z.id === activeZone && (
+                  <Icon name="Check" className="ml-auto h-4 w-4 text-primary" />
+                )}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      <nav className="scrollbar-soft flex-1 overflow-y-auto px-3">
+      <nav className="scrollbar-soft mt-3 flex-1 overflow-y-auto px-3">
         <ul className="flex flex-col gap-0.5">
           {zone.items.map((item) => (
-            <SidebarItem
-              key={item.id}
-              item={item}
-              pathname={pathname}
-              collapsed={collapsed}
-            />
+            <SidebarItem key={item.id} item={item} pathname={pathname} collapsed={collapsed} />
           ))}
         </ul>
       </nav>

@@ -15,6 +15,8 @@ export const SHELL = {
   contentTabs: "content-tabs",
   zonesBar: "zones-bar",
   zoneTab: (id: string) => `zone-tab-${id}`,
+  zoneSelector: "zone-selector",
+  zoneOption: (id: string) => `zone-option-${id}`,
   zoneSettings: "zone-settings-btn",
   zoneSidebarItem: (id: string) => `zone-item-${id}`,
   sidebarCollapse: "sidebar-collapse-btn",
