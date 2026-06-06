@@ -1,10 +1,10 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "@/lib/icon";
 import { cn } from "@/lib/utils";
 import { SHELL } from "@/constants/testIds";
 import { useZoneStore } from "@/stores/zone-store";
 import { useSidebarStore } from "@/stores/sidebar-store";
-import { ZONES, itemMatches, type ZoneItem } from "@/lib/data/zones";
+import { ZONES, itemMatches, zoneHomePath, type ZoneItem } from "@/lib/data/zones";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +23,7 @@ function BrandLogo({ className }: { className?: string }) {
 
 export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const activeZone = useZoneStore((s) => s.activeZone);
   const setActiveZone = useZoneStore((s) => s.setActiveZone);
   const collapsedStore = useSidebarStore((s) => s.collapsed);
@@ -88,7 +89,10 @@ export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) 
               <DropdownMenuItem
                 key={z.id}
                 data-testid={SHELL.zoneOption(z.id)}
-                onClick={() => setActiveZone(z.id)}
+                onClick={() => {
+                  setActiveZone(z.id);
+                  navigate(zoneHomePath(z));
+                }}
                 className={cn("gap-2.5", z.id === activeZone && "bg-accent font-bold")}
               >
                 <Icon name={z.icon} className="h-4 w-4 text-primary" strokeWidth={2} />

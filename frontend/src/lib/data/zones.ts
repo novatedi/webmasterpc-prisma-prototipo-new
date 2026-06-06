@@ -142,3 +142,11 @@ export function findZoneItem(itemId: string): ZoneItem | undefined {
   }
   return undefined;
 }
+
+/** Ruta de "inicio" de una zona: primer item con página real; si no, el primero como placeholder. */
+export function zoneHomePath(zone: Zone): string {
+  const withRoute = zone.items.find((i) => i.to);
+  if (withRoute?.to) return withRoute.to;
+  const first = zone.items[0];
+  return first ? `/proximamente/${first.id}` : "/inicio";
+}

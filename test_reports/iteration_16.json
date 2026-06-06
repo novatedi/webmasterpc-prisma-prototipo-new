@@ -1,0 +1,33 @@
+{
+  "summary": "Validated 'select zone navigates to zone home' feature in Sidebar. All 7 zones (web, diseno, ia, marketing, clientes, tienda, ajustes) navigate to the correct URL when their option in the zone selector dropdown (Radix DropdownMenu) is clicked. Topbar title, sidebar items and welcome heading on /inicio confirmed. Zero console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "zone-option-web -> /inicio (¡Bienvenido, Alejandro!)": "PASS",
+    "zone-option-diseno -> /paginas (Páginas)": "PASS",
+    "zone-option-marketing -> /ajustes/identidad (Identidad)": "PASS",
+    "zone-option-clientes -> /consultas (Consultas)": "PASS",
+    "zone-option-ajustes -> /ajustes/general (General y dominio)": "PASS",
+    "zone-option-ia -> /proximamente/asistente-ia (Asistente IA)": "PASS",
+    "zone-option-tienda -> /proximamente/catalogo (Catálogo)": "PASS",
+    "sidebar updates to new zone items (paginas visible, consultas hidden after switching to diseno)": "PASS",
+    "console_errors": "0"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Sidebar.tsx onClick correctly does setActiveZone(z.id) then navigate(zoneHomePath(z)) — order is fine because zone is also re-synced by AppShell useEffect on pathname.",
+    "zoneHomePath() correctly falls back to '/proximamente/<first item id>' when no item has a 'to' (IA and Tienda zones).",
+    "AppShell.tsx useEffect sync uses findZoneByPath which works for /proximamente paths only indirectly; since navigate target is /proximamente/<id> there's no matching zone in findZoneByPath, but setActiveZone was already called in Sidebar before navigation, so the active zone is preserved. Verified empirically (sidebar shows IA/Tienda items)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Frontend-only Zustand app, no backend. Zone selector lives inside Sidebar (Radix DropdownMenu). Use data-testid='zone-selector' to open and 'zone-option-<id>' to click; wait_for_timeout 300ms for menu animation."
+}
