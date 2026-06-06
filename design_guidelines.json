@@ -1,0 +1,69 @@
+{
+  "theme": "Light & Dark Mode Support",
+  "archetype": "Archetype 5: Luxury / Premium Gallery. Tailored for an older, sophisticated professional.",
+  "typography": {
+    "fonts": "Nunito (Primary/Body). Ensure elegant typesetting with tracking adjustments for uppercase elements.",
+    "heading": {
+      "classes": "text-3xl md:text-4xl font-light tracking-tight text-foreground",
+      "text": "Bienvenido de nuevo"
+    },
+    "subtitle": {
+      "classes": "text-base text-muted-foreground mt-2",
+      "text": "Inicia sesión para acceder a tu panel de administración"
+    }
+  },
+  "colors": {
+    "background": "bg-background",
+    "card": "bg-card",
+    "primary": "bg-primary",
+    "text": "text-foreground",
+    "muted": "text-muted-foreground",
+    "border": "border-border"
+  },
+  "layout_proportions": {
+    "container": "min-h-screen w-full flex flex-col md:flex-row bg-background",
+    "left_panel": "hidden md:flex flex-col justify-end w-[50%] lg:w-[55%] relative overflow-hidden bg-zinc-950",
+    "right_panel": "flex w-full md:w-[50%] lg:w-[45%] items-center justify-center p-6 md:p-12 lg:p-24",
+    "form_wrapper": "w-full max-w-sm mx-auto flex flex-col gap-8",
+    "responsive": "On mobile, the left image panel is hidden, and the right panel takes 100% width."
+  },
+  "components": {
+    "left_image_panel": {
+      "image": "https://images.pexels.com/photos/32551745/pexels-photo-32551745.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image_classes": "absolute inset-0 object-cover w-full h-full opacity-90",
+      "overlay": "absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10",
+      "logo_container": "z-20 relative p-12 w-full text-center text-white flex flex-col items-center justify-center pb-16",
+      "logo_design": "Use Lucide 'Box' or 'Hexagon' icon (size 32, strokeWidth 1.5) + 'PRISMA STUDIO' in text-xl tracking-[0.2em] font-light uppercase mt-4."
+    },
+    "right_login_panel": {
+      "user_identity": "Top left of the form wrapper: flex items-center gap-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-2. Text: 'ALEJANDRO MARTÍNEZ / ESCULTOR'",
+      "form_spacing": "space-y-6",
+      "input_groups": "space-y-2. Use Label + Input.",
+      "inputs": "h-12 w-full rounded-md border border-border bg-background px-3 py-2 text-sm shadow-soft-sm. Include left-aligned Lucide icons (Mail for email, Lock for password) inside the input wrapper with pl-10. Password must have an eye toggle on the right with pr-10.",
+      "email_field": "Label: 'Correo electrónico', Placeholder: 'tu@email.com', Icon: Mail",
+      "password_field": "Label: 'Contraseña', Icon: Lock, Toggle: Eye/EyeOff",
+      "actions_row": "flex items-center justify-between mt-4. Left: Checkbox 'Recordarme' with label. Right: Link '¿Olvidaste tu contraseña?' text-sm text-primary hover:underline.",
+      "submit_cta": "Button full width (w-full h-12 text-base mt-2 shadow-soft). Text: 'Iniciar sesión'. Mock functionality only.",
+      "divider_helper": "flex items-center gap-4 my-8 before:flex-1 before:border-t before:border-border after:flex-1 after:border-t after:border-border text-xs text-muted-foreground. Subtext: '¿No tienes cuenta? Contacta con tu administrador.'",
+      "footer": "text-xs text-center text-muted-foreground mt-8. Text: 'Desarrollado por Novatedi'"
+    }
+  },
+  "interactions": {
+    "focus": "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+    "hover": "CTA button hover opacity-90. Links hover text-primary/80.",
+    "testing": "MANDATORY: Add data-testid attributes to all inputs, buttons, and links (e.g., 'login-email-input', 'login-submit-btn', 'login-forgot-password-link')."
+  },
+  "instructions_to_main_agent": [
+    "Create the login UI in standard JavaScript (.js/.jsx) - do NOT use .tsx, as specified in the CRITICAL RULES.",
+    "Implement the 2-column layout. The left column takes up to 55% width, the right takes 45%.",
+    "To fix the 'too wide' issue requested by the user, restrict the form container on the right side to `max-w-sm` (384px) centered with `mx-auto`.",
+    "Ensure the Prisma logo and text are at the BOTTOM CENTER of the left image panel over the dark gradient.",
+    "Include the brand block 'ALEJANDRO MARTÍNEZ / ESCULTOR' above the 'Bienvenido de nuevo' heading in the right panel.",
+    "Use Lucide icons to construct the Prisma logo, input icons, and password visibility toggle.",
+    "Ensure inputs are h-12 for better accessibility for older users.",
+    "This is a front-end only mock. The form submit should just prevent default and simulate success (e.g., navigate to a dashboard).",
+    "Apply all texts in Spanish exactly as specified.",
+    "Ensure compatibility with existing Tailwind variables (--background, --card, --primary, etc.) for flawless Dark/Light mode support.",
+    "Include data-testid attributes on all interactive elements to support automated testing."
+  ]
+}
