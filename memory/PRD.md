@@ -56,6 +56,11 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - [x] **Secciones** (módulo activable, ruta `/secciones`) – 2026-06-04. Catálogo + autoría role-gated (cliente/admin): cuadrícula con miniaturas por preset, buscador+filtros, detalle con presets interactivos, "añadir a una página", tabla de slots (solo lectura cliente / editable admin), diálogo crear sección, tarjeta del modelo (Slots vs Presets). 8 secciones seed. Archivos: `pages/Secciones.tsx`, `components/secciones/*`, `stores/secciones-store.ts`, `stores/role-store.ts`, `lib/data/secciones.ts`. Testeado (iteration_12, 100% tras fix de reactividad Zustand).
 - [x] **Separación Identidad (Marketing) vs Ajustes** – 2026-06-06. `Identidad` pasa a página propia en `/identidad` (zona Marketing, sin pestañas). La zona Ajustes tiene "General y dominio" en `/ajustes/general` con pestañas **General + Dominio**. `Mantenimiento` ya no hereda esas pestañas (sección propia en navigation.ts antes de `ajustes`). `/ajustes/identidad` redirige a `/identidad`; `/ajustes` redirige a `/ajustes/general`. Archivos: `lib/navigation.ts`, `App.js`, `lib/data/zones.ts` (marketing→/identidad), `Topbar.tsx` (resolveMeta). Verificado por capturas. Eliminada la barra de zonas superior; las zonas se eligen con un **desplegable "ZONA ACTIVA"** dentro del sidebar (DropdownMenu, 7 zonas). El **título de la página** vuelve a la top bar (resuelto por ruta), en la misma línea que tema/notificaciones/perfil, a la derecha del logo. Eliminados encabezados duplicados en Inicio/Analíticas/Secciones/Legal. Arreglado: Empresa (título desaparecía) y Servicios (aparecía muy abajo). Sidebar colapsable intacto. Archivos: `Sidebar.tsx`, `Topbar.tsx` (resolveMeta), `AppShell.tsx` (ZonesBar eliminado), páginas Inicio/Analiticas/Secciones/Legal. Testeado (iteration_15, 100%). Barra unificada (zonas con subrayado a la izquierda + tema/ajustes/notificaciones/perfil a la derecha en el mismo nivel); logo "ClientBrand" movido a la sidebar. Sidebar **colapsable** (botón «Contraer», 260↔76px) y a **toda altura** (logo arriba del todo; la barra de zonas empieza a su derecha). Eliminada la barra de título global redundante (Topbar solo muestra acciones inyectadas). Dashboard de Inicio rediseñado: 5 KPIs, "Rendimiento de tu sitio" (chart + mini-stats), "Actividad reciente", "Páginas principales" (miniaturas), "Estado de tu sitio" (medidor 92%), "Acciones rápidas". Archivos: `ZonesBar.tsx`, `Sidebar.tsx`, `Topbar.tsx`, `AppShell.tsx`, `pages/Inicio.tsx`, `components/inicio/*`, `lib/data/dashboard.ts`. Testeado (iteration_14, 100%).
   - Archivos: `pages/Analiticas.tsx`, `lib/data/analiticas.ts`, ruta `/analiticas`, módulo en `modules.ts` con `to:/analiticas`, títulos en `Topbar.tsx`, testIds `ANALITICAS`.
+- [x] **Galería** (zona Web, rutas `/galeria` y `/galeria/album/:albumId`) – 2026-06-06. Gestión de álbumes de fotos, 100% mock:
+  - **Nivel 1 – Cuadrícula de álbumes** (`pages/galeria/Albumes.tsx`): grid de tarjetas (portada + título + descripción + contador de fotos), botón "Crear álbum" con diálogo (nombre + descripción). Al crear se navega directamente al detalle del álbum vacío (elección del usuario).
+  - **Nivel 2 – Detalle del álbum** (`pages/galeria/AlbumDetalle.tsx`): patrón 2 paneles igual que Biblioteca — cuadrícula de fotos a la izquierda + panel de edición a la derecha. El panel muestra "Dónde se usa" (lista de usos con enlace a editar, o estado "sin usar"), metadatos (nombre + alt SEO) con Guardar, y Eliminar (deshabilitado si la foto está en uso). Gestión del álbum: renombrar (lápiz inline), añadir foto (file input → blob URL), eliminar álbum (AlertDialog) y botón volver.
+  - Estado: `stores/galeria-store.ts` (álbumes + selectedPhotoId; CRUD de álbum y foto). Datos seed: 3 álbumes en `lib/data/galeria.ts` (reutiliza `PhotoUsage` de biblioteca). Activado `to:/galeria` en `zones.ts` y título en `Topbar.tsx`.
+  - Testeado por testing_agent (iteration_17, frontend 100%, 7/7 flujos). Pendiente menor no bloqueante: revocar `URL.createObjectURL` al borrar fotos (riesgo leve de fuga de memoria en sesiones largas).
 
 ## Backlog (P0/P1/P2 para próximos prompts)
 
@@ -75,5 +80,10 @@ Lote dividido en 6 prompts. **Prompt 1/6 – Fundaciones: shell navegable + 2 te
 - Modo "Vista previa de la web pública" desde dentro del editor.
 
 ## Next Tasks (immediate)
-- Esperar feedback del usuario sobre el shell.
-- Cuando confirme, arrancar el **Prompt 2/6: Sección Obras**.
+- Construir las páginas/homepages "Próximamente" de las zonas pendientes cuando el usuario lo pida:
+  - IA: Asistente IA, Chatbot IA, AI Studio
+  - Tienda Online: Catálogo, Pedidos, Formas de pago, Envíos, Certificados COA
+  - Marketing: Redes Sociales, SEO, Newsletter, Calendario
+  - Clientes: Suscriptores, Cita previa
+  - Diseño: Temas, Efectos de Temporada
+- Mejora opcional pendiente en Galería: revocar blob URLs al borrar fotos.

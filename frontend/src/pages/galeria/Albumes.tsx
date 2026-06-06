@@ -97,9 +97,6 @@ export default function GaleriaAlbumesPage() {
               ({albums.length})
             </span>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Agrupa tus fotos en álbumes para mostrarlas en tu web.
-          </p>
         </div>
         <Button
           data-testid="album-create-btn"
