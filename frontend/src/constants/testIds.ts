@@ -129,6 +129,11 @@ export const OBRAS = {
   workCard: (id: string) => `work-card-${id}`,
   workEditBtn: (id: string) => `work-edit-${id}`,
   workViewBtn: (id: string) => `work-view-${id}`,
+  viewToggle: "obras-view-toggle",
+  listRow: (id: string) => `work-row-${id}`,
+  listEdit: (id: string) => `work-row-edit-${id}`,
+  listView: (id: string) => `work-row-view-${id}`,
+  dragHandle: (id: string) => `work-drag-${id}`,
   emptyState: "obras-empty-state",
   editTitle: "edit-title",
   editDescription: "edit-description",
@@ -244,6 +249,11 @@ export const BLOG = {
   formDraft: "article-form-draft",
   searchInput: "blog-search-input",
   filterStatus: "blog-filter-status",
+  viewToggle: "blog-view-toggle",
+  card: (id: string) => `article-card-${id}`,
+  cardEdit: (id: string) => `article-card-edit-${id}`,
+  cardDelete: (id: string) => `article-card-delete-${id}`,
+  dragHandle: (id: string) => `article-drag-${id}`,
 };
 
 export const CONSULTAS = {

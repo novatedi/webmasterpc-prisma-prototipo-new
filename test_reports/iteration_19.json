@@ -1,0 +1,43 @@
+{
+  "summary": "Frontend-only E2E testing of new Obras Catálogo and Blog Artículos view toggle (grid/list) and dnd-kit drag-reorder behaviour. All scenarios passed including default views, view toggle, drag-reorder in both views, order persistence across view toggles, click-without-drag does not reorder, filter+reorder with hidden items preserved, and regression flows (add, search, empty state, navigation).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "obras_view_toggle_default_grid": "PASS - obras-grid present, obras-list absent",
+    "obras_view_toggle_to_list": "PASS - obras-list shown, obras-grid removed; rows include thumbnail, title, status, materials, work-row-edit-<id>, work-row-view-<id>, work-drag-<id>",
+    "obras_drag_grid": "PASS - dragging work-drag-w1 over w3 reordered ['w1','w2','w3',...] -> ['w2','w3','w1',...]",
+    "obras_order_persistence_grid_to_list": "PASS - same order in list view after grid drag",
+    "obras_click_handle_no_movement": "PASS - plain click on work-drag did not reorder",
+    "obras_drag_list": "PASS - dragging first row onto a later row reordered list rows",
+    "obras_order_persistence_list_to_grid": "PASS",
+    "obras_regression_add_work": "PASS - obras-add-work navigates to /obras/obra/nueva",
+    "obras_regression_filter_empty_state": "PASS - obras-empty-state appears with non-matching search",
+    "blog_view_toggle_default_list": "PASS - blog-table visible, blog-grid absent (default list)",
+    "blog_view_toggle_to_grid": "PASS - blog-grid shown with article-card-<id>",
+    "blog_drag_list": "PASS - drag in <tr> rows reorders articles",
+    "blog_order_persistence_list_to_grid": "PASS",
+    "blog_drag_grid": "PASS - drag in cards reorders articles",
+    "blog_filter_reorder_publicados": "PASS - reordered two published articles; switching back to Todos kept all 4 articles, no duplicates and draft article preserved",
+    "blog_regression_search": "PASS - 'No hay artículos' empty message on non-matching search"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Both Catalogo.tsx (~336 LOC) and Articulos.tsx (~395 LOC) keep three concerns inline (sortable card, sortable row, page). Consider extracting SortableWorkRow/SortableWorkCard and ArticleRow/ArticleCard into /components/obras and /components/blog respectively for readability and reuse, mirroring the existing WorkCard component.",
+    "Drag handle in Articulos.tsx grid card sits at top-3 right-3 same coordinates as the Status badge could feel close on small cards; not a bug, just a polish note.",
+    "ViewToggle is well-typed and reused — good. Strategy switches between rectSortingStrategy and verticalListSortingStrategy correctly per view.",
+    "reorderWithinFiltered correctly preserves out-of-view items; verified empirically by filter+reorder test (Todos count unchanged after dragging within Publicados subset)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100%"},
+  "test_credentials": "None required (no auth).",
+  "seed_data_creation": "None. Used existing Zustand seed (8 works w1-w8, 4 articles art-1..art-4).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Obras/Blog grid+list+dnd-kit drag-reorder feature is fully working. dnd-kit PointerSensor activation distance is 5px; tests used mouse.down -> 15 incremental mouse.moves -> mouse.up. State resets on full page reload (in-memory Zustand) which is expected. Useful testids: obras-view-toggle/-grid/-list, obras-grid, obras-list, work-card-<id>, work-row-<id>, work-row-edit-<id>, work-row-view-<id>, work-drag-<id>; blog-view-toggle/-grid/-list, blog-table, blog-grid, article-row-<id>, article-card-<id>, article-drag-<id>, article-edit/-delete-<id>, article-card-edit/-delete-<id>.",
+  "rca of the issue": "N/A - no issues found"
+}

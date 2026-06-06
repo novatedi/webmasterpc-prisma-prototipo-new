@@ -9,6 +9,7 @@ interface ArticlesState {
   add: (a: Article) => void;
   update: (id: ID, patch: Partial<Article>) => void;
   remove: (id: ID) => void;
+  reorder: (ids: ID[]) => void;
 }
 
 export const useArticlesStore = create<ArticlesState>((set, get) => ({
@@ -20,4 +21,10 @@ export const useArticlesStore = create<ArticlesState>((set, get) => ({
       items: get().items.map((a) => (a.id === id ? { ...a, ...patch } : a)),
     }),
   remove: (id) => set({ items: get().items.filter((a) => a.id !== id) }),
+  reorder: (ids) =>
+    set({
+      items: ids
+        .map((id) => get().items.find((a) => a.id === id))
+        .filter(Boolean) as Article[],
+    }),
 }));

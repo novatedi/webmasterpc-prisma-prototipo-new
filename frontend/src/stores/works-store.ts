@@ -9,6 +9,7 @@ interface WorksState {
   update: (id: ID, patch: Partial<Work>) => void;
   remove: (id: ID) => void;
   reorderImages: (id: ID, images: WorkImage[]) => void;
+  reorder: (ids: ID[]) => void;
 }
 
 export const useWorksStore = create<WorksState>((set, get) => ({
@@ -25,5 +26,11 @@ export const useWorksStore = create<WorksState>((set, get) => ({
       works: get().works.map((w) =>
         w.id === id ? { ...w, images, coverUrl: images[0]?.url ?? w.coverUrl } : w,
       ),
+    }),
+  reorder: (ids) =>
+    set({
+      works: ids
+        .map((id) => get().works.find((w) => w.id === id))
+        .filter(Boolean) as Work[],
     }),
 }));
