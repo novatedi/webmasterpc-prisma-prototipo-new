@@ -26,42 +26,39 @@ export function AppShell() {
   return (
     <div
       data-testid={SHELL.app}
-      className="flex h-screen w-full flex-col overflow-hidden bg-background text-foreground"
+      className="flex h-screen w-full overflow-hidden bg-background text-foreground"
     >
-      {/* Barra de zonas (nivel 1) */}
-      <ZonesBar />
+      {/* Sidebar a toda altura (con el logo arriba del todo) — fija en desktop */}
+      <div className="hidden lg:flex">
+        <Sidebar />
+      </div>
 
-      <div className="flex min-h-0 flex-1">
-        {/* Sidebar de la zona activa (nivel 2) — fija en desktop */}
-        <div className="hidden lg:flex">
-          <Sidebar />
-        </div>
+      {/* Sidebar como drawer en móvil */}
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent
+          side="left"
+          className="w-[280px] border-r border-sidebar-border bg-sidebar p-0"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Menú de navegación</SheetTitle>
+            <SheetDescription>
+              Accede a las secciones de la zona activa de Prisma Studio.
+            </SheetDescription>
+          </SheetHeader>
+          <Sidebar forceExpanded />
+        </SheetContent>
+      </Sheet>
 
-        {/* Sidebar como drawer en móvil */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent
-            side="left"
-            className="w-[280px] border-r border-sidebar-border bg-sidebar p-0"
-          >
-            <SheetHeader className="sr-only">
-              <SheetTitle>Menú de navegación</SheetTitle>
-              <SheetDescription>
-                Accede a las secciones de la zona activa de Prisma Studio.
-              </SheetDescription>
-            </SheetHeader>
-            <Sidebar forceExpanded />
-          </SheetContent>
-        </Sheet>
-
-        <div className="flex h-full min-w-0 flex-1 flex-col">
-          <Topbar />
-          <ContentTabs />
-          <main className="scrollbar-soft flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8 md:py-8">
-            <div className="mx-auto w-full max-w-[1400px] animate-fade-in">
-              <Outlet />
-            </div>
-          </main>
-        </div>
+      {/* Columna de contenido: barra de zonas + topbar + contenido */}
+      <div className="flex h-full min-w-0 flex-1 flex-col">
+        <ZonesBar />
+        <Topbar />
+        <ContentTabs />
+        <main className="scrollbar-soft flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8 md:py-8">
+          <div className="mx-auto w-full max-w-[1400px] animate-fade-in">
+            <Outlet />
+          </div>
+        </main>
       </div>
     </div>
   );

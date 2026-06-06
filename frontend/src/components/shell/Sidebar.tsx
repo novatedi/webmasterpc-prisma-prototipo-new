@@ -35,7 +35,7 @@ export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) 
       <div
         data-testid={SHELL.sidebarLogo}
         className={cn(
-          "flex items-center gap-2.5 px-5 pt-6 pb-4",
+          "flex h-16 shrink-0 items-center gap-2.5 border-b border-sidebar-border px-5",
           collapsed && "justify-center px-0",
         )}
       >
@@ -50,7 +50,7 @@ export function Sidebar({ forceExpanded = false }: { forceExpanded?: boolean }) 
       {/* Cabecera de zona */}
       <div
         className={cn(
-          "mx-3 mb-2 flex items-center gap-2.5 rounded-xl bg-sidebar-accent/40 px-3 py-2.5",
+          "mx-3 mb-2 mt-3 flex items-center gap-2.5 rounded-xl bg-sidebar-accent/40 px-3 py-2.5",
           collapsed && "mx-2 justify-center px-0",
         )}
       >
