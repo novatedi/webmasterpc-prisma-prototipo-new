@@ -115,7 +115,7 @@ function PhotoTile({
         data-testid={`gphoto-drag-${photo.id}`}
         aria-label="Arrastrar para reordenar"
         title="Arrastra para cambiar el orden"
-        className="absolute left-2 top-2 flex h-8 w-8 cursor-grab touch-none items-center justify-center rounded-lg bg-black/55 text-white opacity-0 backdrop-blur transition-opacity hover:bg-black/70 group-hover:opacity-100 active:cursor-grabbing"
+        className="absolute left-2 top-2 flex h-8 w-8 cursor-grab touch-none items-center justify-center rounded-lg bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/70 active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >
@@ -133,7 +133,7 @@ function PhotoTile({
           "absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-lg backdrop-blur transition-all",
           isCover
             ? "bg-primary text-primary-foreground opacity-100"
-            : "bg-black/55 text-white opacity-0 hover:bg-black/70 group-hover:opacity-100",
+            : "bg-black/55 text-white hover:bg-black/70",
         )}
       >
         <Icon name="Star" className={cn("h-4 w-4", isCover && "fill-current")} />
