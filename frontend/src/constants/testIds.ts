@@ -17,6 +17,7 @@ export const SHELL = {
   zoneTab: (id: string) => `zone-tab-${id}`,
   zoneSettings: "zone-settings-btn",
   zoneSidebarItem: (id: string) => `zone-item-${id}`,
+  sidebarCollapse: "sidebar-collapse-btn",
 };
 
 export const HOME = {
@@ -25,6 +26,13 @@ export const HOME = {
   topPagesCard: "card-top-pages",
   quickActions: "card-quick-actions",
   quickActionItem: (id: string) => `quick-action-${id}`,
+  kpi: (id: string) => `home-kpi-${id}`,
+  performanceCard: "home-performance",
+  activityCard: "home-activity",
+  statusCard: "home-status",
+  mainPagesCard: "home-main-pages",
+  mainPage: (id: string) => `home-page-${id}`,
+  actionItem: (id: string) => `home-action-${id}`,
 };
 
 export const ANALITICAS = {

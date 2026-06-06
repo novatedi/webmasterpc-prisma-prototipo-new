@@ -49,7 +49,7 @@ export function AppShell() {
                 Accede a las secciones de la zona activa de Prisma Studio.
               </SheetDescription>
             </SheetHeader>
-            <Sidebar />
+            <Sidebar forceExpanded />
           </SheetContent>
         </Sheet>
 
