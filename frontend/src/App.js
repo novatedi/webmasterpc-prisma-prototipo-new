@@ -30,6 +30,8 @@ import FuncionesPage from "@/pages/Funciones";
 import ModuloPlaceholder from "@/pages/ModuloPlaceholder";
 import PreviewWebPage from "@/pages/PreviewWeb";
 import BibliotecaPage from "@/pages/Biblioteca";
+import GaleriaAlbumes from "@/pages/galeria/Albumes";
+import GaleriaAlbumDetalle from "@/pages/galeria/AlbumDetalle";
 import PrensaLista from "@/pages/prensa/Lista";
 import AnaliticasPage from "@/pages/Analiticas";
 import LegalPage from "@/pages/Legal";
@@ -63,6 +65,8 @@ export default function App() {
 
           <Route path="/funciones" element={<FuncionesPage />} />
           <Route path="/biblioteca" element={<BibliotecaPage />} />
+          <Route path="/galeria" element={<GaleriaAlbumes />} />
+          <Route path="/galeria/album/:albumId" element={<GaleriaAlbumDetalle />} />
           <Route path="/preview-web" element={<PreviewWebPage />} />
           <Route path="/analiticas" element={<AnaliticasPage />} />
           <Route path="/legal" element={<LegalPage />} />

@@ -26,6 +26,7 @@ const titles: Record<string, { title: string; subtitle: string }> = {
   secciones: { title: "Secciones", subtitle: "El catálogo de secciones prediseñadas de tu web." },
   funciones: { title: "Módulos", subtitle: "Activa o desactiva funciones de tu panel." },
   biblioteca: { title: "Biblioteca", subtitle: "Tus imágenes y archivos en un solo lugar." },
+  galeria: { title: "Galería", subtitle: "Agrupa tus fotos en álbumes para mostrarlas en tu web." },
   prensa: { title: "Prensa", subtitle: "Artículos, entrevistas y críticas sobre tu trabajo." },
   analiticas: { title: "Analíticas & Métricas", subtitle: "Supervisa el rendimiento de tu web: visitas, obras más populares y tráfico." },
   legal: { title: "Textos Legales & Privacidad", subtitle: "Genera los textos legales obligatorios de tu web (RGPD + LSSI, España) o usa los tuyos." },

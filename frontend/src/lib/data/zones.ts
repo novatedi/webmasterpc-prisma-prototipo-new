@@ -35,7 +35,7 @@ export const ZONES: Zone[] = [
       it("empresa", "Empresa", "Building2", true, "/empresa/historia"),
       it("servicios", "Servicios", "Boxes", true, "/servicios"),
       it("obras", "Obras", "Hammer", true, "/obras/catalogo"),
-      it("galeria", "Galería", "Image", true),
+      it("galeria", "Galería", "Image", true, "/galeria"),
       it("blog", "Blog", "PenSquare", true, "/blog/articulos"),
       it("resenas", "Reseñas", "Star", true, "/resenas"),
       it("prensa", "Prensa", "Newspaper", true, "/prensa"),
