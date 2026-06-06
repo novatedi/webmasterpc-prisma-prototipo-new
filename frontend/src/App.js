@@ -37,6 +37,7 @@ import AnaliticasPage from "@/pages/Analiticas";
 import LegalPage from "@/pages/Legal";
 import SeccionesPage from "@/pages/Secciones";
 import ProximamentePage from "@/pages/Proximamente";
+import LoginPage from "@/pages/Login";
 import EditarPrensa from "@/pages/prensa/Editar";
 import { Toaster } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
@@ -46,8 +47,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AppShell />}>
-          <Route index element={<Navigate to="/inicio" replace />} />
           <Route path="/inicio" element={<InicioPage />} />
 
           <Route path="/empresa" element={<Navigate to="/empresa/historia" replace />} />
