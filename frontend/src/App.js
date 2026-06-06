@@ -97,8 +97,9 @@ export default function App() {
           <Route path="/resenas" element={<ResenasPage />} />
           <Route path="/resenas/:sub" element={<ResenasPage />} />
 
-          <Route path="/ajustes" element={<Navigate to="/ajustes/identidad" replace />} />
-          <Route path="/ajustes/identidad" element={<IdentidadPage />} />
+          <Route path="/ajustes" element={<Navigate to="/ajustes/general" replace />} />
+          <Route path="/identidad" element={<IdentidadPage />} />
+          <Route path="/ajustes/identidad" element={<Navigate to="/identidad" replace />} />
           <Route path="/ajustes/dominio" element={<DominioPage />} />
           <Route path="/ajustes/general" element={<GeneralPage />} />
           <Route path="/ajustes/mantenimiento" element={<MantenimientoPage />} />

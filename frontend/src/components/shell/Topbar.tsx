@@ -44,10 +44,9 @@ function resolveMeta(pathname: string): { title: string; subtitle: string } {
     const item = findZoneItem(id);
     return { title: item?.label ?? "Próximamente", subtitle: "Esta función estará disponible muy pronto." };
   }
-  if (pathname.startsWith("/ajustes/identidad")) return titles.identidad;
-  if (pathname.startsWith("/ajustes/dominio")) return titles.dominio;
-  if (pathname.startsWith("/ajustes/general")) return titles.general;
+  if (pathname.startsWith("/identidad")) return titles.identidad;
   if (pathname.startsWith("/ajustes/mantenimiento")) return titles.mantenimiento;
+  if (pathname.startsWith("/ajustes")) return titles.general;
   const seg = pathname.split("/").filter(Boolean)[0] ?? "inicio";
   const key = seg === "preview-web" ? "preview" : seg;
   return titles[key] ?? titles.inicio;

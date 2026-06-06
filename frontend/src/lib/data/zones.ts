@@ -69,7 +69,7 @@ export const ZONES: Zone[] = [
     label: "Marketing",
     icon: "Megaphone",
     items: [
-      it("identidad", "Identidad", "Palette", true, "/ajustes/identidad"),
+      it("identidad", "Identidad", "Palette", true, "/identidad"),
       it("redes", "Redes Sociales", "Share2", false),
       it("seo", "SEO", "Search", false),
       it("analiticas", "Analíticas", "BarChart3", true, "/analiticas"),

@@ -83,14 +83,25 @@ export const sections: Section[] = [
     to: "/resenas",
   },
   {
+    id: "identidad",
+    label: "Identidad",
+    icon: "Palette",
+    to: "/identidad",
+  },
+  {
+    id: "mantenimiento",
+    label: "Mantenimiento",
+    icon: "Wrench",
+    to: "/ajustes/mantenimiento",
+  },
+  {
     id: "ajustes",
     label: "Ajustes",
     icon: "Settings",
-    to: "/ajustes/identidad",
+    to: "/ajustes/general",
     subsections: [
-      { id: "identidad", label: "Identidad", to: "/ajustes/identidad" },
-      { id: "dominio", label: "Dominio", to: "/ajustes/dominio" },
       { id: "general", label: "General", to: "/ajustes/general" },
+      { id: "dominio", label: "Dominio", to: "/ajustes/dominio" },
     ],
   },
 ];
