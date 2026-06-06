@@ -1,0 +1,24 @@
+{
+  "summary": "Validated the new 2-level zone shell (ZonesBar + Sidebar per active zone) on Prisma Studio. All 10 functional flows pass: zones bar render + default 'web' active, sidebar items per zone (web/diseno/ia/marketing/clientes/tienda/ajustes), Pronto badges match spec exactly, zone switch does NOT navigate, active items navigate to correct real routes (obras, empresa, blog, paginas, secciones, modulos→/funciones with 33 toggles, identidad, consultas, general, mantenimiento), Pronto items go to /proximamente/:itemId showing page-proximamente with label + Próximamente tag, route→zone sync works for /obras→web, /secciones→diseno, /ajustes/general→engranaje(ajustes), /ajustes/identidad→marketing, dark mode toggle keeps zones-bar and sidebar legible. 0 console errors across all flows.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Sidebar's isActive logic uses itemMatches for items with `to`; for /ajustes/identidad the item.to startsWith('/ajustes') so it matches precisely - works as designed. Confirmed identidad lives under Marketing zone intentionally per spec.",
+    "findZoneByPath iterates ZONES in order; since the Marketing item 'identidad' points to /ajustes/identidad and is encountered before the Ajustes zone, /ajustes/identidad correctly maps to Marketing. Logic is correct but fragile to ordering changes - consider adding a unit test if ZONES order changes.",
+    "Proximamente.tsx Volver button navigates to /inicio - works, but consider browser back for better UX (minor)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100%"},
+  "test_credentials": "N/A (no auth)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Shell de 2 niveles funciona perfectamente: ZonesBar (data-testid=zones-bar) con tabs web/diseno/ia/marketing/clientes/tienda y zone-settings-btn (Ajustes). Sidebar muestra items de zona activa (data-testid=zone-item-<id>). Items inactivos llevan badge 'Pronto' y navegan a /proximamente/:itemId mostrando page-proximamente. Sync ruta→zona vía useEffect en AppShell.tsx con findZoneByPath. Default zone 'web' al recargar (Zustand en memoria). Sin errores de consola. Verificado en dark mode también.",
+  "rca of the issue": "N/A - no issues found"
+}

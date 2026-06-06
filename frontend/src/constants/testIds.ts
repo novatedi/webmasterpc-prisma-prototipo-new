@@ -13,6 +13,10 @@ export const SHELL = {
   notifications: "topbar-notifications",
   userAvatar: "topbar-user-avatar",
   contentTabs: "content-tabs",
+  zonesBar: "zones-bar",
+  zoneTab: (id: string) => `zone-tab-${id}`,
+  zoneSettings: "zone-settings-btn",
+  zoneSidebarItem: (id: string) => `zone-item-${id}`,
 };
 
 export const HOME = {
