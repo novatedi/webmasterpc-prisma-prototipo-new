@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeStore } from "@/stores/theme-store";
 import { useTopbarActions } from "@/stores/topbar-actions-store";
 import { useMobileNavStore } from "@/stores/mobile-nav-store";
@@ -55,6 +55,7 @@ function resolveMeta(pathname: string): { title: string; subtitle: string } {
 
 export function Topbar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { mode, toggle } = useThemeStore();
   const injectedActions = useTopbarActions((s) => s.node);
   const openMobileNav = useMobileNavStore((s) => s.toggle);
@@ -162,7 +163,10 @@ export function Topbar() {
               Ajustes
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              data-testid="topbar-logout"
+              onClick={() => navigate("/login")}
+            >
               <Icon name="LogOut" className="mr-2 h-4 w-4" />
               Salir
             </DropdownMenuItem>
