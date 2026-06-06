@@ -1,5 +1,22 @@
 import { useState, useRef } from "react";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  KeyboardSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { useGaleriaStore } from "@/stores/galeria-store";
 import type { GalleryPhoto } from "@/lib/data/galeria";
 import { Input } from "@/components/ui/input";
@@ -32,51 +49,116 @@ const USAGE_ICONS: Record<string, string> = {
 function PhotoTile({
   photo,
   active,
+  isCover,
   onClick,
+  onSetCover,
 }: {
   photo: GalleryPhoto;
   active: boolean;
+  isCover: boolean;
   onClick: () => void;
+  onSetCover: () => void;
 }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({ id: photo.id });
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 20 : undefined,
+  };
   const usedCount = photo.usages.length;
   return (
-    <button
-      type="button"
+    <div
+      ref={setNodeRef}
+      style={style}
       data-testid={`gphoto-tile-${photo.id}`}
-      onClick={onClick}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border bg-card text-left shadow-soft-sm transition-all hover:-translate-y-0.5 hover:shadow-soft",
+        "group relative flex flex-col overflow-hidden rounded-2xl border bg-card text-left shadow-soft-sm transition-shadow hover:shadow-soft",
         active ? "border-primary ring-2 ring-primary/30" : "border-border",
       )}
     >
-      <div className="aspect-[4/5] overflow-hidden bg-muted">
-        <img
-          src={photo.url}
-          alt={photo.alt}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
-      <div className="flex flex-col gap-2 p-3">
-        <div className="truncate text-sm font-extrabold">{photo.name}</div>
-        <span
-          className={cn(
-            "w-fit rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-            usedCount === 0
-              ? "bg-muted text-muted-foreground"
-              : "bg-primary/10 text-primary",
-          )}
-        >
-          {usedCount === 0
-            ? "Sin usar"
-            : `Se usa ${usedCount} ${usedCount === 1 ? "vez" : "veces"}`}
+      <button
+        type="button"
+        onClick={onClick}
+        className="flex flex-col text-left"
+      >
+        <div className="aspect-[4/5] overflow-hidden bg-muted">
+          <img
+            src={photo.url}
+            alt={photo.alt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            draggable={false}
+          />
+        </div>
+        <div className="flex flex-col gap-2 p-3">
+          <div className="truncate text-sm font-extrabold">{photo.name}</div>
+          <span
+            className={cn(
+              "w-fit rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+              usedCount === 0
+                ? "bg-muted text-muted-foreground"
+                : "bg-primary/10 text-primary",
+            )}
+          >
+            {usedCount === 0
+              ? "Sin usar"
+              : `Se usa ${usedCount} ${usedCount === 1 ? "vez" : "veces"}`}
+          </span>
+        </div>
+      </button>
+
+      {/* Asa para arrastrar */}
+      <button
+        type="button"
+        data-testid={`gphoto-drag-${photo.id}`}
+        aria-label="Arrastrar para reordenar"
+        title="Arrastra para cambiar el orden"
+        className="absolute left-2 top-2 flex h-8 w-8 cursor-grab touch-none items-center justify-center rounded-lg bg-black/55 text-white opacity-0 backdrop-blur transition-opacity hover:bg-black/70 group-hover:opacity-100 active:cursor-grabbing"
+        {...attributes}
+        {...listeners}
+      >
+        <Icon name="GripVertical" className="h-4 w-4" />
+      </button>
+
+      {/* Marcar como portada */}
+      <button
+        type="button"
+        data-testid={`gphoto-cover-${photo.id}`}
+        onClick={onSetCover}
+        aria-label={isCover ? "Es la portada" : "Usar como portada"}
+        title={isCover ? "Portada del álbum" : "Usar como portada"}
+        className={cn(
+          "absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-lg backdrop-blur transition-all",
+          isCover
+            ? "bg-primary text-primary-foreground opacity-100"
+            : "bg-black/55 text-white opacity-0 hover:bg-black/70 group-hover:opacity-100",
+        )}
+      >
+        <Icon name="Star" className={cn("h-4 w-4", isCover && "fill-current")} />
+      </button>
+
+      {isCover && (
+        <span className="pointer-events-none absolute bottom-[68px] left-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary-foreground">
+          Portada
         </span>
-      </div>
-    </button>
+      )}
+    </div>
   );
 }
 
-function PhotoDetail({ albumId, photo }: { albumId: string; photo: GalleryPhoto }) {
+function PhotoDetail({
+  albumId,
+  photo,
+  isCover,
+  onSetCover,
+}: {
+  albumId: string;
+  photo: GalleryPhoto;
+  isCover: boolean;
+  onSetCover: () => void;
+}) {
   const navigate = useNavigate();
   const { updatePhoto, removePhoto } = useGaleriaStore();
   const [edit, setEdit] = useState({ name: photo.name, alt: photo.alt });
@@ -185,29 +267,44 @@ function PhotoDetail({ albumId, photo }: { albumId: string; photo: GalleryPhoto 
         </div>
       </div>
 
-      <div className="mt-auto flex flex-wrap gap-2 border-t border-border pt-4">
-        <Button
-          data-testid="gphoto-save"
-          onClick={save}
-          className="h-10 flex-1 gap-2 rounded-xl bg-primary px-5 font-bold text-primary-foreground hover:bg-primary/90"
-        >
-          <Icon name="Save" className="h-4 w-4" />
-          Guardar
-        </Button>
+      <div className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
         <Button
           variant="outline"
-          data-testid="gphoto-delete"
-          onClick={handleRemove}
-          disabled={used}
+          data-testid="gphoto-set-cover"
+          onClick={onSetCover}
+          disabled={isCover}
           className={cn(
-            "h-10 gap-2 rounded-xl font-bold",
-            !used && "text-destructive hover:bg-destructive/10",
+            "h-10 w-full gap-2 rounded-xl font-bold",
+            isCover && "border-primary/40 bg-primary/5 text-primary",
           )}
-          title={used ? "No puedes borrar una foto que está en uso." : "Eliminar"}
         >
-          <Icon name="Trash2" className="h-4 w-4" />
-          Eliminar
+          <Icon name="Star" className={cn("h-4 w-4", isCover && "fill-current")} />
+          {isCover ? "Es la portada del álbum" : "Usar como portada"}
         </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            data-testid="gphoto-save"
+            onClick={save}
+            className="h-10 flex-1 gap-2 rounded-xl bg-primary px-5 font-bold text-primary-foreground hover:bg-primary/90"
+          >
+            <Icon name="Save" className="h-4 w-4" />
+            Guardar
+          </Button>
+          <Button
+            variant="outline"
+            data-testid="gphoto-delete"
+            onClick={handleRemove}
+            disabled={used}
+            className={cn(
+              "h-10 gap-2 rounded-xl font-bold",
+              !used && "text-destructive hover:bg-destructive/10",
+            )}
+            title={used ? "No puedes borrar una foto que está en uso." : "Eliminar"}
+          >
+            <Icon name="Trash2" className="h-4 w-4" />
+            Eliminar
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -216,17 +313,42 @@ function PhotoDetail({ albumId, photo }: { albumId: string; photo: GalleryPhoto 
 export default function AlbumDetallePage() {
   const { albumId = "" } = useParams();
   const navigate = useNavigate();
-  const { albums, selectedPhotoId, selectPhoto, addPhoto, updateAlbum, removeAlbum } =
+  const { albums, selectedPhotoId, selectPhoto, addPhoto, updateAlbum, removeAlbum, reorderPhotos, setCover } =
     useGaleriaStore();
   const fileRef = useRef<HTMLInputElement>(null);
   const [renaming, setRenaming] = useState(false);
   const [albumForm, setAlbumForm] = useState({ title: "", description: "" });
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
 
   const album = albums.find((a) => a.id === albumId);
   if (!album) return <Navigate to="/galeria" replace />;
 
+  const onDragEnd = (e: DragEndEvent) => {
+    const { active, over } = e;
+    if (!over || active.id === over.id) return;
+    const oldIdx = album.photos.findIndex((p) => p.id === active.id);
+    const newIdx = album.photos.findIndex((p) => p.id === over.id);
+    if (oldIdx < 0 || newIdx < 0) return;
+    reorderPhotos(album.id, arrayMove(album.photos, oldIdx, newIdx));
+  };
+
+  const handleSetCover = (photoId: string) => {
+    setCover(album.id, photoId);
+    toast.success("Portada del álbum actualizada");
+  };
+
   const selected =
     album.photos.find((p) => p.id === selectedPhotoId) ?? album.photos[0] ?? null;
+
+  const coverId =
+    album.coverPhotoId && album.photos.some((p) => p.id === album.coverPhotoId)
+      ? album.coverPhotoId
+      : album.photos.find((p) => p.url === album.coverUrl)?.id ??
+        album.photos[0]?.id ??
+        null;
 
   const handleUpload = (file: File | null) => {
     if (!file) return;
@@ -393,23 +515,42 @@ export default function AlbumDetallePage() {
             Este álbum está vacío. Añade tu primera foto.
           </div>
         ) : (
-          <div
-            data-testid="album-photos-grid"
-            className="grid h-fit grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            {album.photos.map((p) => (
-              <PhotoTile
-                key={p.id}
-                photo={p}
-                active={selected?.id === p.id}
-                onClick={() => selectPhoto(p.id)}
-              />
-            ))}
+          <div className="flex flex-col gap-3">
+            <p className="text-xs text-muted-foreground">
+              Arrastra <Icon name="GripVertical" className="-mt-0.5 inline h-3.5 w-3.5" /> para
+              reordenar las fotos · pulsa la <Icon name="Star" className="-mt-0.5 inline h-3.5 w-3.5" /> para
+              elegir la portada del álbum.
+            </p>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+              <SortableContext items={album.photos.map((p) => p.id)} strategy={rectSortingStrategy}>
+                <div
+                  data-testid="album-photos-grid"
+                  className="grid h-fit grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4"
+                >
+                  {album.photos.map((p) => (
+                    <PhotoTile
+                      key={p.id}
+                      photo={p}
+                      active={selected?.id === p.id}
+                      isCover={coverId === p.id}
+                      onClick={() => selectPhoto(p.id)}
+                      onSetCover={() => handleSetCover(p.id)}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           </div>
         )}
 
         {selected ? (
-          <PhotoDetail key={selected.id} albumId={album.id} photo={selected} />
+          <PhotoDetail
+            key={selected.id}
+            albumId={album.id}
+            photo={selected}
+            isCover={coverId === selected.id}
+            onSetCover={() => handleSetCover(selected.id)}
+          />
         ) : (
           <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-12 text-center text-sm text-muted-foreground">
             Añade una foto y selecciónala para editar sus datos.

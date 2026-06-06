@@ -12,6 +12,8 @@ interface GaleriaState {
   addPhoto: (albumId: ID, photo: GalleryPhoto) => void;
   updatePhoto: (albumId: ID, photoId: ID, patch: Partial<GalleryPhoto>) => void;
   removePhoto: (albumId: ID, photoId: ID) => void;
+  reorderPhotos: (albumId: ID, photos: GalleryPhoto[]) => void;
+  setCover: (albumId: ID, photoId: ID) => void;
 }
 
 const mapAlbum = (
@@ -48,7 +50,12 @@ export const useGaleriaStore = create<GaleriaState>((set, get) => ({
       albums: mapAlbum(get().albums, albumId, (a) => ({
         ...a,
         photos: a.photos.filter((p) => p.id !== photoId),
+        coverPhotoId: a.coverPhotoId === photoId ? undefined : a.coverPhotoId,
       })),
       selectedPhotoId: get().selectedPhotoId === photoId ? null : get().selectedPhotoId,
     }),
+  reorderPhotos: (albumId, photos) =>
+    set({ albums: mapAlbum(get().albums, albumId, (a) => ({ ...a, photos })) }),
+  setCover: (albumId, photoId) =>
+    set({ albums: mapAlbum(get().albums, albumId, (a) => ({ ...a, coverPhotoId: photoId })) }),
 }));

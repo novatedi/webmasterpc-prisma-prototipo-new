@@ -17,6 +17,8 @@ export interface GalleryAlbum {
   description: string;
   /** Portada del álbum; si está vacía se usa la primera foto. */
   coverUrl: string;
+  /** Foto elegida como portada (tiene prioridad sobre coverUrl). */
+  coverPhotoId?: ID;
   createdAt: string;
   photos: GalleryPhoto[];
 }
@@ -135,7 +137,11 @@ export const albumsSeed: GalleryAlbum[] = [
   },
 ];
 
-/** Portada efectiva de un álbum: su coverUrl o la primera foto. */
+/** Portada efectiva de un álbum: la foto elegida, su coverUrl, o la primera foto. */
 export function albumCover(album: GalleryAlbum): string {
+  if (album.coverPhotoId) {
+    const chosen = album.photos.find((p) => p.id === album.coverPhotoId);
+    if (chosen) return chosen.url;
+  }
   return album.coverUrl || album.photos[0]?.url || "";
 }
